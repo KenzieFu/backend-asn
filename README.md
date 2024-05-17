@@ -270,3 +270,150 @@ Menghapus sub Kategori
    message:"Berhasil menghapus sebuah Sub Kategori"
 }
 ```
+
+## Course
+### Get All Courses based on category
+mengambil semua course berdasarkan category
+- **URL:** `/courses/account/:account_id/category/:category_id`
+- **Method:** GET
+- **Response:**
+
+```
+{
+    "data": [
+        {
+            "course_id": "1",
+            "category_id": "1",
+            "course_image": "course/nasionalisme/course_image-2024-05-16T05%32%11.752Z.png",
+            "course_queue": 1,
+            "course_name": "Nasionalisme",
+            "course_description": "",
+            "course_file": "course/nasionalisme/course_file-2024-05-16T09:16:49.516Z.txt",
+            "createdAt": "2024-05-16 05:32:11.808000+00",
+            "updatedAt": "2024-05-16 09:16:49.518000+00",
+            "isCleared": "0"
+        },
+        {
+            "course_id": "4",
+            "category_id": "1",
+            "course_image": "course/belanegara/course_image-2024-05-17T02%53%39.264Z.jpeg",
+            "course_queue": 2,
+            "course_name": "Bela Negara",
+            "course_description": "Memberikan penjelasan lebih mendalam mengenai pentingnya bela negara dalam keberlangsungan suatu negara",
+            "course_file": null,
+            "createdAt": "2024-05-17 02:53:39.306000+00",
+            "updatedAt": "2024-05-17 02:53:39.306000+00",
+            "isCleared": "0"
+        }
+    ]
+}
+```
+
+### Get One Courses 
+mengambil satu course 
+- **URL:** `/courses/:course_id/account/:account_id`
+- **Method:** GET
+- **Response:**
+```
+{
+    "data": {
+        "course_id": "1",
+        "category_id": "1",
+        "course_image": "course/nasionalisme/course_image-2024-05-16T05%32%11.752Z.png",
+        "course_queue": 1,
+        "course_name": "Nasionalisme",
+        "course_description": "",
+        "course_file": "course/nasionalisme/course_file-2024-05-16T09:16:49.516Z.txt",
+        "createdAt": "2024-05-16 05:32:11.808000+00",
+        "updatedAt": "2024-05-16 09:16:49.518000+00",
+        "isCleared": "0",
+        "content": [
+            "Pentingnya Nasionalisme",
+            "Nasionalisme adalah sikap atau semangat yang harus dimiliki setiap warga negara Indonesia dalam mencintai tanah airnya. Apa arti dan tujuan nasionalisme?",
+            "Secara etimologis, kata nasionalisme berasal dari kata nationalism dan nation dalam bahasa Inggris. Dalam studi semantik kata nation tersebut berasal dari kata Latin yakni natio yang berakar pada kata nascor yang bermakna 'saya lahir', atau dari kata natus sum, yang berarti 'saya dilahirkan'.",
+            "Dalam perkembangannya kata nation merujuk pada bangsa atau kelompok manusia yang menjadi penduduk resmi suatu negara dalam mencintai tanah airnya.",
+            ""
+        ]
+    }
+}
+```
+
+
+### Create Courses 
+Create course 
+- **URL:** `/courses`
+- **Method:** POST
+- **Request Body:**
+```
+//Gunakan formdata karena mau upload image 
+{
+    category_id:"1",
+    course_name:"Aap",
+    course_description:"Haloooo"
+    course_image:"pathfile"
+}
+```
+- **Response:**
+```
+{
+ message:"Berhasil Menambahkan Course Baru"
+}
+```
+
+### Assign Course Content
+Memasukan kontent txt sebuah course
+- **URL:** `/courses/content/:course_id`
+- **Method:** PUT
+- **Request Body:**
+```
+// Gunakan form data
+// gak ada yang disend ke body sih karena diambil si multer utk ambe buffer
+{
+    course_file
+}
+```
+- **Response:**
+```
+{
+    message:"Berhasil memasukan Materi"
+}
+```
+### Update Course Sequence
+Mengubah Urutan Course suatu kategori
+- **URL:** `/courses/queue/:course_id`
+- **Method:** PUT
+- **Request Body:**
+```
+
+{
+    course_queue:"2"
+}
+```
+- **Response:**
+```
+{
+    message:"Berhasil mengubah Urutan Course"
+}
+```
+
+### Update Course
+Update Course suatu kategori
+- **URL:** `/courses`
+- **Method:** POST
+- **Request Body:**
+```
+//Gunakan formdata karena mau upload image 
+{
+    category_id:"1",
+    course_name:"Aap",
+    course_description:"Haloooo"
+    course_image:"pathfile"
+}
+```
+- **Response:**
+```
+{
+ message:"Berhasil Mengubah Course"
+}
+```
+
