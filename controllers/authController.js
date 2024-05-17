@@ -43,6 +43,12 @@ exports.login = async (req,res,next)=>{
       {expiresIn:"14d"}
     );
 
+    const update = await Accounts.update({accessToken:token},{
+      where:{
+        account_id:account.account_id
+      }
+    })
+
     //hasil token :
     res.status(200).json({
       data:token
@@ -55,8 +61,15 @@ exports.login = async (req,res,next)=>{
 }
 
 exports.logout = async(req,res,next)=>{
+  const{account_id} =req.params 
   try{
     res.clearCookie("jwt");
+    const update = await Accounts.update({accessToken:null},{
+      where:{
+        account_id:account_id
+      }
+    })
+    
     delete req.headers["Authorization"];
     res.status(200).json({
       message:"Logout Berhasil"
