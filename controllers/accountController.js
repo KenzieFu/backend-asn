@@ -12,6 +12,7 @@ exports.createAccount = async (req,res,next)=>{
       password,
       name,
     } = req.body;
+    console.log(email)
     const randomUsername = 100+Math.random()*(999-100)
     const username= `${name.toLowerCase().trim()}-${randomUsername}`
     const hashed = await bcryptjs.hash(password,12);
@@ -74,7 +75,7 @@ exports.getAccounts=async (req,res,next)=>{
 exports.getAccount =async (req,res,next)=>{
   const {account_id} = req.params;
   try{
-    const account =await Account.findByPk(account_id);
+    const account =await Accounts.findByPk(account_id);
     if(!account){
       const error = new Error("Not Found");
       error.statusCode = 404;

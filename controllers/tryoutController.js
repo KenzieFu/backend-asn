@@ -5,6 +5,7 @@ const { urlLapis, bucketName } = require("../static");
 const {Storage} = require("@google-cloud/storage")
 const _ = require("lodash");
 const TryoutScore = require("../models/tryoutScore");
+const { QueryTypes } = require("@sequelize/core");
 
 const storage = new Storage();
 
@@ -23,7 +24,12 @@ exports.finishedTryout  = async(req,res,next)=>{
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
           WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id  LIMIT 1) as accessed
-      FROM tryout t WHERE isCleared!=0 ORDER BY t.createdAt DESC ;`
+      FROM tryout t 
+       GROUP BY t.tryout_id  
+      HAVING isCleared != 0 ORDER BY t.createdAt DESC ;`,
+      {
+        type: QueryTypes.SELECT,
+      }
     );
   
     res.status(200).json({
@@ -49,7 +55,11 @@ exports.boughtTryout = async(req,res,next)=>{
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
           WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id  LIMIT 1) as accessed
-      FROM tryout t WHERE accessed!=0 ORDER BY t.createdAt DESC ;`
+      FROM tryout t  GROUP BY t.tryout_id  
+      HAVING isCleared != 0 ORDER BY t.createdAt DESC ;`,
+      {
+        type: QueryTypes.SELECT,
+      }
     );
   
     res.status(200).json({
@@ -75,7 +85,11 @@ exports.getTryouts = async (req,res,next)=>{
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
           WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id  LIMIT 1) as accessed
-      FROM tryout t ORDER BY t.createdAt DESC ;`
+      FROM tryout t ORDER BY t.createdAt DESC ;`,
+      {
+      
+        type: QueryTypes.SELECT,
+      }
     );
 
     res.status(200).json({
@@ -101,7 +115,10 @@ exports.getTryout = async(req,res,next)=>{
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
           WHERE ut.account_id=${account_id} AND ut.tryout_id=${tryout_id}  LIMIT 1) as accessed
-      FROM tryout t WHERE t.tryout_id=${tryout_id} ;`
+      FROM tryout t WHERE t.tryout_id=${tryout_id} ;`,
+      {
+        type: QueryTypes.SELECT,
+      }
     );
     if(!tryout[0]){
       const error = new Error("Not Found");

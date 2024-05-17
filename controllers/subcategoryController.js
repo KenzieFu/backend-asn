@@ -9,9 +9,10 @@ exports.getSubCategories = async(req,res,next)=>{
 
   try{
     const subCategories = await SubCategory.findAll();
-    res.json(200).json({
+    res.status(200).json({
       data:subCategories
-    })
+    });
+
   }catch(err){
     next(err);
   }
@@ -52,7 +53,7 @@ exports.createSubcategory = async(req,res,next)=>{
     }
     const createSub = await SubCategory.create({category_id,subCategory_name});
     res.status(200).json({
-      message:"Berhasil Menambahkan Sub Kategori"
+      message:"Berhasil Menambahkan sub kategori"
     })
   }catch(err){
     next(err);
@@ -78,6 +79,9 @@ exports.updateSubCategory = async(req,res,next)=>{
         subCategory_id:subCategory_id
       }
     }) 
+    res.status(200).json({
+      message:"Berhasil mengubah sub kategori"
+    })
   }catch(err){
     next(err);
   }

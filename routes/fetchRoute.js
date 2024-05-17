@@ -36,10 +36,10 @@ router.get("/courses/:course_id/account/:account_id",courseController.getCourse)
 
 //Tryout
 //get Tryouts
-router.get("/tryouts",tryoutController.getTryouts);
+router.get("/tryouts/account/:account_id",tryoutController.getTryouts);
 
 //get tryout detail
-router.get("/tryouts/:tryout_id",tryoutController.getTryout);
+router.get("/tryouts/:tryout_id/account/:account_id",tryoutController.getTryout);
 
 //get startTryout
 router.get("/tryouts/:tryout_id/start",tryoutController.getQuiz);
@@ -50,8 +50,6 @@ router.get("/tryouts/finished/:account_id",tryoutController.finishedTryout);
 //get bought tryout
 router.get("/tryouts/bought/:account_id",tryoutController.boughtTryout);
 
-//get quiz
-router.get("/tryouts/getQuiz/:tryout_id",tryoutController.getQuiz);
 
 //get leaderboard
 router.get("/leaderboard/:tryout_id",tryoutController.leaderBoardTryout);

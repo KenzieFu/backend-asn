@@ -64,7 +64,7 @@ exports.updateCategory = async (req,res,next)=>{
     });
 
     res.status(200).json({
-      message:"Berhasil Mengubah Kategori"
+      message:"Berhasil engubah kategori"
     })
 
   }catch(err){

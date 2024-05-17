@@ -45,12 +45,7 @@ exports.login = async (req,res,next)=>{
 
     //hasil token :
     res.status(200).json({
-      data:{
-        account_id:account.account_id,
-        email:account.email,
-        username:account.username,
-        token:token
-      }
+      data:token
     })
   }catch(error){
     
