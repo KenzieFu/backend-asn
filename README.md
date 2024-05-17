@@ -398,8 +398,8 @@ Mengubah Urutan Course suatu kategori
 
 ### Update Course
 Update Course suatu kategori
-- **URL:** `/courses`
-- **Method:** POST
+- **URL:** `/courses/:course_id`
+- **Method:** PUT
 - **Request Body:**
 ```
 //Gunakan formdata karena mau upload image 
@@ -414,6 +414,336 @@ Update Course suatu kategori
 ```
 {
  message:"Berhasil Mengubah Course"
+}
+```
+
+### Delete Course
+Menghapus Course 
+- **URL:** `/courses/:course_id`
+- **Method:** DELETE
+- **Response:**
+```
+{
+ message:"Berhasil Menghapus Course"
+}
+```
+
+## Tryout
+### ALL tryouts
+Mengambil semua tryout
+attribute clear ama accessed itu maksudny si user uda kelarin /belum sama, itu uda dibeli gak?
+- **URL:** `/tryouts/account/:account_id`
+- **Method:** GET
+- **Response:**
+```
+{
+    "data": [
+        {
+            "tryout_id": "1",
+            "tryout_title": "Tryout 1 CPNS 2024",
+            "tryout_file": "tryout/tryout1cpns2024/tryout_file-2024-05-17T05:28:07.866Z.json",
+            "tryout_duration": 12600,
+            "tryout_total": 110,
+            "tryout_status": "ACTIVE",
+            "tryout_type": "PAY",
+            "tryout_price": 10000,
+            "tryout_closed": "2024-05-31 05:28:07+00",
+            "createdAt": "2024-05-17 05:28:07.899000+00",
+            "updatedAt": "2024-05-17 05:28:07.899000+00",
+            "isCleared": "0",
+            "accessed": "0"
+        }
+    ]
+}
+```
+### Detail tryout
+Mengambil detail tryout
+attribute clear ama accessed itu maksudny si user uda kelarin /belum sama, itu uda dibeli gak?
+- **URL:** `/tryouts/:tryout_id/account/:account_id`
+- **Method:** GET
+- **Response:**
+```
+{
+    "data": {
+        "tryout_id": "1",
+        "tryout_title": "Tryout 1 CPNS 2024",
+        "tryout_file": "tryout/tryout1cpns2024/tryout_file-2024-05-17T05:28:07.866Z.json",
+        "tryout_duration": 12600,
+        "tryout_total": 110,
+        "tryout_status": "ACTIVE",
+        "tryout_type": "PAY",
+        "tryout_price": 10000,
+        "tryout_closed": "2024-05-31 05:28:07+00",
+        "createdAt": "2024-05-17 05:28:07.899000+00",
+        "updatedAt": "2024-05-17 05:28:07.899000+00",
+        "isCleared": "0",
+        "accessed": "0"
+    }
+}
+```
+
+### Mulai tryout
+Mengambil soal dan attribute tryout
+
+- **URL:** `/tryouts/:tryout_id/start`
+- **Method:** GET
+- **Response:**
+```
+{
+    "data": {
+        "tryout_id": "1",
+        "tryout_title": "Tryout 1 CPNS 2024",
+        "tryout_duration": 12600,
+        "tryout_total": 110,
+        "tryout_content": [
+            {
+                "tryout_num": "2",
+                "question_image": "",
+                "subCategory_id": "1",
+                "category": "TIU",
+                "question": "Berikut yang bukan merupakan bahasa pemrogramana?",
+                "option": [
+                    "C++",
+                    "Javascript",
+                    "Piton",
+                    "C#",
+                    "C"
+                ],
+                "score": [
+                    0,
+                    0,
+                    5,
+                    0,
+                    0
+                ],
+                "option_image": false,
+                "pembahasan": "Tidak Ada"
+            },
+            {
+                "tryout_num": "3",
+                "question_image": "",
+                "subCategory_id": "3",
+                "category": "TIU",
+                "question": "Mengapa Clean Code itu penting?",
+                "option": [
+                    "Memudahkan keterbacaan pada kode",
+                    "Karena ngetrend",
+                    "Keren",
+                    "Bawaan dari kecil",
+                    "Menarik"
+                ],
+                "score": [
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "option_image": false,
+                "pembahasan": "Tidak Ada"
+            },
+            {
+                "tryout_num": "1",
+                "question_image": "q1.png",
+                "subCategory_id": "1",
+                "category": "TIU",
+                "question": "Tailwind merupakan salah satu framework dari?",
+                "option": [
+                    "HTML",
+                    "CSS",
+                    "Javascript",
+                    "Java",
+                    "Kotlin"
+                ],
+                "score": [
+                    0,
+                    5,
+                    0,
+                    0,
+                    0
+                ],
+                "option_image": true,
+                "pembahasan": "Tidak Ada"
+            },
+            {
+                "tryout_num": "6",
+                "question_image": "",
+                "subCategory_id": "11",
+                "category": "TWK",
+                "question": "2+0?",
+                "option": [
+                    "2",
+                    "5",
+                    "3",
+                    "4",
+                    "7"
+                ],
+                "score": [
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "option_image": false,
+                "pembahasan": "Tidak Ada"
+            },
+            {
+                "tryout_num": "5",
+                "question_image": "",
+                "subCategory_id": "11",
+                "category": "TWK",
+                "question": "2+3?",
+                "option": [
+                    "1",
+                    "5",
+                    "3",
+                    "4",
+                    "7"
+                ],
+                "score": [
+                    0,
+                    5,
+                    0,
+                    0,
+                    0
+                ],
+                "option_image": false,
+                "pembahasan": "Tidak Ada"
+            },
+            {
+                "tryout_num": "4",
+                "question_image": "",
+                "subCategory_id": "12",
+                "category": "TWK",
+                "question": "2+2?",
+                "option": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ],
+                "score": [
+                    0,
+                    0,
+                    0,
+                    5,
+                    0
+                ],
+                "option_image": false,
+                "pembahasan": "Tidak Ada"
+            },
+            {
+                "tryout_num": "8",
+                "question_image": "",
+                "subCategory_id": "18",
+                "category": "TKP",
+                "question": "Jika ada teman yang sakit, seharusnya kamu?",
+                "option": [
+                    "Rusuhin",
+                    "Minta makan",
+                    "Menjenguk",
+                    "Gak peduli",
+                    "Pura-pura gak tau"
+                ],
+                "score": [
+                    1,
+                    2,
+                    5,
+                    4,
+                    3
+                ],
+                "option_image": false,
+                "pembahasan": "Tidak Ada"
+            },
+            {
+                "tryout_num": "7",
+                "question_image": "",
+                "subCategory_id": "17",
+                "category": "TKP",
+                "question": "Apa kamu sudah hebat?",
+                "option": [
+                    "Ya",
+                    "Tidak",
+                    "Masih cupu",
+                    "Maaf, belum bang/kak",
+                    "Kamu siapa ya?"
+                ],
+                "score": [
+                    3,
+                    4,
+                    2,
+                    5,
+                    1
+                ],
+                "option_image": false,
+                "pembahasan": "Tidak Ada"
+            },
+            {
+                "tryout_num": "9",
+                "question_image": "",
+                "subCategory_id": "20",
+                "category": "TKP",
+                "question": "Sebagai abang yang baik, jika anda melihat adik kalian yang kesusahan, yang harus anda lakukan adalah?",
+                "option": [
+                    "Mencari kegiatan lain",
+                    "Mengajak bermain game",
+                    "Melihat saja",
+                    "Menghiraukannya",
+                    "Membantunya"
+                ],
+                "score": [
+                    3,
+                    1,
+                    2,
+                    4,
+                    5
+                ],
+                "option_image": false,
+                "pembahasan": "Tidak Ada"
+            }
+        ]
+    }
+}
+```
+
+### Finished tryout
+Menampilkan semua tryout yang diselesaikan user
+- **URL:** `/tryouts/finished/:account_id`
+- **Method:** GET
+- **Response:**
+```
+// sama kek get tryouts si sebenerny utk outputnya, ini karena lgi kosong aja
+    {
+    "data": []
+}
+```
+
+### Bought tryout
+Menampilkan semua tryout yang dibeli user
+- **URL:** `/tryouts/bought/:account_id`
+- **Method:** GET
+- **Response:**
+```
+// sama kek get tryouts si sebenerny utk outputnya, ini karena lgi kosong aja
+    {
+    "data": []
+}
+```
+
+### LeaderBoard tryout
+Menampilkan semua tryout yang dibeli user
+- **URL:** `/leaderboard/:tryout_id`
+- **Method:** GET
+- **Response:**
+```
+// nampilin semua attribute di table tryoutScore
+    {
+
+    "data": [
+    {},{},....
+]
 }
 ```
 
