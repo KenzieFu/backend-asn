@@ -1,0 +1,35 @@
+{
+  "openapi":"3.0.3",
+  "info":{
+    "title":"Backend Lolos ASN API Documentation",
+    "description":"Title",
+    "version":"1.0.0"
+  },
+  "servers":[
+    {
+      "url":"http://{host}:{port}",
+      "variables": {
+        "host" :{
+          "default": "localhost",
+          "description": "Server Host",
+          "enum": [
+            "localhost"
+          ]
+        },
+        "port" :{
+          "default": "8080",
+          "description": "Server Port",
+          "enum": [
+            "8080"
+          ]
+        }
+
+      }
+    }
+  ],
+  "paths":{
+    "/hello":{
+    
+    }
+  }
+}

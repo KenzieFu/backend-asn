@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "lidm-423502",
+  "private_key_id": "1b14a7634db6a830ba21a103f664c30080322a8e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCc/bBvJdmZgduv\nJ1UazA9D26Jtr2i+ufkRKuVlXXwomXOsPjC1h292QiwR8cyANeNrr4jEXcUbTrjF\nxGYxt+NBc2mAIaRSdn3HDbbl2F6g+FvR+vWwHD8rjJ6Y6VM6DNCWgp8cied1xd1T\ngNu8BSl4NVt3NAJRJusuGzorCKxziXm0OZ4O2Xds8WY/lKp/olGhivwCSuyuyEkp\nyYavvbtq1H9IZPad/SjirwiavexKTeypUhHoCBi05T8wc+xsByEzHoYO4M2D6Iaj\nY4zXsXtO2E/WuIoX32lU+tsaxFru9mMmoMy9ze2QLZlCfIxgiUnVF1nErUBFGCO7\n0JhrERWrAgMBAAECggEALpXrXrgtH6vUvF+gFgEawIiy5PiJzRsTqUAA7Xj1yHhs\nxl54Bs4nScDuIe8OP7d+Am0G2Tp4LJfKJcmXh8ZpFfmBA4g4Ik5OGZzcuszfm8XH\nPYLKmFVxe2NRhs+qJk46MYeWXpofiKfL+yUAT4V6nlS7DR7uVxWE8VwcATwkLG5W\ngxeL5B1Ksh5jiibsHkle1dmmh6P6HKmQKAzZgel08BKnJJ3RlVyel+XenJb7b9tG\n92dm3m9v5CvtzHqa3UVs1Y/STKEuZVFQ0uPSEyrWkryqyCq10bUrnt1xs/SBnydd\n7KEp/jZcvTtt/vHDR5SfdjPTS7lqOs96ucZDYGp+yQKBgQDSlJgerDYxLxxoQ9N9\ns5aGiiKKXDJO6gQXXABI4vlrL+kgPPkqi8V/vcrvMx9JXXRzDmRiY0lvHrxguawd\npve5Hndvr8Le/bWYdGOPYAotuz6nrE3nFJLomoluLZ0YN/h9JSKCTllzXNdVOeMn\nKyIil6HQgXcSZoS+wwNcAghfuQKBgQC+2hmGISp+bNaYk6TRIsZfjFIy7vGVLyBX\nqucA7y8FF3fxaFtfdJ6dOxQt6F2PxINmeC2cfG2LNBRmYT1NR9ZSLuETODE5BG3P\nPV9tT/4bhwM6pXa9rUtXEkvgE6JwO4sT2Sijz8MavI126alGOuMK2TAXZXedw5gX\n5ufnThHqgwKBgDPIfq/sQVdO8nlhVHyw0O88wMmtamGlgmQMJ7XEuvj0yys2Uz93\nJ5YGIgU4WRU9eglhHKZlLAW7VS+j+QNBr+FB8LTyT8VuNl3LIUB8qYQda4boBDAz\nCv1QI0OIy/zMprp/i0Dn629HAVzf41Aad0Zya0RO0e0gcLxIUGcryMthAoGBALBM\n0N8yrAp1iBcR7GK0+QMyoIwkZk4lZn8VhKc8S/csIsSCXkXjeNJNzOpLiIJSSf/S\nbG/uEVNSHLYmhXZqMfVhENGsSuwcx0N1sj1Mc7QCGF2IlBPLjZk1cZnhCWEb3/HJ\n3NzWA6kjHJsIZjJWG33d+6rhNIosMMeDqh3l5G75AoGBAK77/qq87A6xB3UUcvWq\npLwHtR0etHVHCqnJYHLi+GcO6JxBGi7NWRgA/Dn83W2HppoURc+SYQOL4+7Q68jF\nHMVZN/bL1+bpir8eUBzwOIa3vnDuE3xTJZIHFQ4UzBvvG7Vs+nL0Awb+FMQSptwR\nYyJTWg4goUNktWV1gsaGYrKe\n-----END PRIVATE KEY-----\n",
+  "client_email": "bucket-admin@lidm-423502.iam.gserviceaccount.com",
+  "client_id": "103825762846243660564",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bucket-admin%40lidm-423502.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

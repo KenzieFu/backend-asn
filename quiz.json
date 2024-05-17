@@ -1,0 +1,173 @@
+[
+  {
+    "tryout_num":"1",
+    "question_image":"q1.png",
+    "subCategory_id":"1",
+    "category":"TIU",
+    "question":"Tailwind merupakan salah satu framework dari?",
+    "option":[
+      "HTML",
+      "CSS",
+      "Javascript",
+      "Java",
+      "Kotlin"
+    ],
+    "score":[
+      0,5,0,0,0
+    ],
+    "option_image":true,
+    "pembahasan":"Tidak Ada"
+  },
+  {
+    "tryout_num":"2",
+    "question_image":"",
+    "subCategory_id":"1",
+    "category":"TIU",
+    "question":"Berikut yang bukan merupakan bahasa pemrogramana?",
+    "option":[
+      "C++",
+      "Javascript",
+      "Piton",
+      "C#",
+      "C"
+    ],
+    "score":[
+      0,0,5,0,0
+    ],
+    "option_image":false,
+    "pembahasan":"Tidak Ada"
+  },
+  {
+    "tryout_num":"3",
+    "question_image":"",
+    "subCategory_id":"3",
+    "category":"TIU",
+    "question":"Mengapa Clean Code itu penting?",
+    "option":[
+      "Memudahkan keterbacaan pada kode",
+      "Karena ngetrend",
+      "Keren",
+      "Bawaan dari kecil",
+      "Menarik"
+    ],
+    "score":[
+      5,0,0,0,0
+    ],
+    "option_image":false,
+    "pembahasan":"Tidak Ada"
+  },
+  {
+    "tryout_num":"4",
+    "question_image":"",
+    "subCategory_id":"12",
+    "category":"TWK",
+    "question":"2+2?",
+    "option":[
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "score":[
+      0,0,0,5,0
+    ],
+    "option_image":false,
+    "pembahasan":"Tidak Ada"
+  },
+  {
+    "tryout_num":"5",
+    "question_image":"",
+    "subCategory_id":"11",
+    "category":"TWK",
+    "question":"2+3?",
+    "option":[
+      "1",
+      "5",
+      "3",
+      "4",
+      "7"
+    ],
+    "score":[
+      0,5,0,0,0
+    ],
+    "option_image":false,
+    "pembahasan":"Tidak Ada"
+  },
+  {
+    "tryout_num":"6",
+    "question_image":"",
+    "subCategory_id":"11",
+    "category":"TWK",
+    "question":"2+0?",
+    "option":[
+      "2",
+      "5",
+      "3",
+      "4",
+      "7"
+    ],
+    "score":[
+      5,0,0,0,0
+    ],
+    "option_image":false,
+    "pembahasan":"Tidak Ada"
+  },
+  {
+    "tryout_num":"7",
+    "question_image":"",
+    "subCategory_id":"17",
+    "category":"TKP",
+    "question":"Apa kamu sudah hebat?",
+    "option":[
+      "Ya",
+      "Tidak",
+      "Masih cupu",
+      "Maaf, belum bang/kak",
+      "Kamu siapa ya?"
+    ],
+    "score":[
+      3,4,2,5,1
+    ],
+    "option_image":false,
+    "pembahasan":"Tidak Ada"
+  },
+  {
+    "tryout_num":"8",
+    "question_image":"",
+    "subCategory_id":"18",
+    "category":"TKP",
+    "question":"Jika ada teman yang sakit, seharusnya kamu?",
+    "option":[
+      "Rusuhin",
+      "Minta makan",
+      "Menjenguk",
+      "Gak peduli",
+      "Pura-pura gak tau"
+    ],
+    "score":[
+      1,2,5,4,3
+    ],
+    "option_image":false,
+    "pembahasan":"Tidak Ada"
+  },
+  {
+    "tryout_num":"9",
+    "question_image":"",
+    "subCategory_id":"20",
+    "category":"TKP",
+    "question":"Sebagai abang yang baik, jika anda melihat adik kalian yang kesusahan, yang harus anda lakukan adalah?",
+    "option":[
+      "Mencari kegiatan lain",
+      "Mengajak bermain game",
+      "Melihat saja",
+      "Menghiraukannya",
+      "Membantunya"
+    ],
+    "score":[
+      3,1,2,4,5
+    ],
+    "option_image":false,
+    "pembahasan":"Tidak Ada"
+  }
+]
