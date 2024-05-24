@@ -40,6 +40,10 @@ const Account = sequelize.define("account",{
     type:DataTypes.STRING(80),
     allowNull:true,
   },
+  avatar:{
+    type:DataTypes.STRING(200),
+    allowNull:true,
+  },
   userRecap:{
     type:DataTypes.STRING(80),
     allowNull:true,

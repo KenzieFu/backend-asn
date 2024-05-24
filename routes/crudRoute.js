@@ -6,11 +6,12 @@ const subCategoryController = require("../controllers/subcategoryController");
 const courseController = require("../controllers/courseController")
 const clearedCourseController = require("../controllers/clearedCourseControllerr")
 const tryoutController = require("../controllers/tryoutController");
-const generateRandomToken = require("../controllers/generateRandomToken")
+const generateRandomToken = require("../controllers/generateRandomToken");
+const { registerValidator } = require("../validator/rules");
 
 // ACCOUNT
 //create account
-router.post("/accounts",accountController.createAccount);
+router.post("/accounts",registerValidator,accountController.createAccount);
 
 //delete account
 router.delete("/accounts/:account_id",accountController.deleteAccount);

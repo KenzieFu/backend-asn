@@ -16,6 +16,7 @@ const Tryout = require("./models/tryout");
 const TryoutScore = require("./models/tryoutScore");
 const SKDAnalysis = require("./models/skd_analysis");
 const TryoutToken = require("./models/tryoutToken");
+const { updateAvatar } = require("./controllers/accountController");
 
 const app = express();
 const storage = multer.memoryStorage()
@@ -66,6 +67,7 @@ app.put("/courses/content/:course_id",uploadMulter.single("course_file"),courseC
 //create tryout
 app.post("/tryouts",uploadMulter.single("tryout_file"),tryoutController.createTryout);
 
+app.post("/account/:account_id/avatar",uploadMulter.single("avatar"),updateAvatar)
 
 
 sequelize
