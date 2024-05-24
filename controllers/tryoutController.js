@@ -185,7 +185,7 @@ exports.getQuiz = async(req,res,next)=>{
     
     if(isFiles && finalQuiz)
       {
-        res.status(200).json({
+        return res.status(200).json({
           data:newTo
         })
       }
