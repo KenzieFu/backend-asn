@@ -14,4 +14,10 @@ exports.registerValidator = [
   }),
 
   
-] 
+]
+
+exports.loginValidator = [
+  body('email',"Email tidak boleh kosong").not().isEmpty(),
+  body('email',"Email tidak valid").not().contains('@'),
+  body('password',"Password masih kosong").not().isEmpty(),
+]

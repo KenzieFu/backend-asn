@@ -70,6 +70,22 @@ exports.boughtTryout = async(req,res,next)=>{
     next(err);
   }
 }
+exports.getNewestTryout = async(req,res,next)=>{
+  try{
+
+    const tryout = await Tryout.findAll({
+      order:[['createdAt',"DESC"]],
+      limit:6,
+    })
+
+    return res.status(200).json({
+      data:tryout
+    });
+
+  }catch(err){
+    next(err);
+  }
+}
 
 exports.getTryouts = async (req,res,next)=>{
   const {account_id } = req.params;

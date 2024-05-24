@@ -38,6 +38,7 @@ router.get("/courses/:course_id/account/:account_id",courseController.getCourse)
 //get Tryouts
 router.get("/tryouts/account/:account_id",tryoutController.getTryouts);
 
+router.get("/tryouts/newest",tryoutController.getNewestTryout); 
 //get tryout detail
 router.get("/tryouts/:tryout_id/account/:account_id",tryoutController.getTryout);
 

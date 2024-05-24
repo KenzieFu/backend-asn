@@ -2,10 +2,18 @@ const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 const Accounts = require("../models/account");
 const { tokenExp } = require("../static");
+const { validationResult } = require("express-validator");
 
 
 exports.login = async (req,res,next)=>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      const error = new Error("Validation Error");
+      error.statusCode = 500
 
+      error.message=errors.array()[0].msg;
+      return next(error); 
+  }
   const credentials = req.body;
   const email = credentials.email;
   const hashedPassword  = credentials.password;
@@ -22,7 +30,7 @@ exports.login = async (req,res,next)=>{
       const error = new Error("Not Found");
       error.statusCode = 404;
       error.message="Akun tidak Ditemukan" 
-      next(error);
+      return next(error);
     }
     console.log(account.password)
     const isEqual = await bcryptjs.compare(hashedPassword,account.password);
