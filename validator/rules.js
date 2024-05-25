@@ -2,8 +2,9 @@ const {body, check} = require("express-validator");
 
 exports.registerValidator = [
 
+  body('name', "Nama tidak boleh kosong").not().isEmpty(),
   body('email',"Email tidak boleh kosong").not().isEmpty(),
-  body('email',"Email tidak valid").not().contains('@'),
+  body('email',"Email tidak valid").isEmail(),
   body('password',"Password masih kosong").not().isEmpty(),
   body('password',"Password minimal memiliki 8 karakter").isLength({min:8}),
   body('password',"Password minimal memiliki 8 karakter").custom((value)=>{
@@ -18,6 +19,6 @@ exports.registerValidator = [
 
 exports.loginValidator = [
   body('email',"Email tidak boleh kosong").not().isEmpty(),
-  body('email',"Email tidak valid").not().contains('@'),
+  body('email',"Email tidak valid").isEmail(),
   body('password',"Password masih kosong").not().isEmpty(),
 ]
