@@ -143,18 +143,27 @@ exports.updateAvatar = async(req,res,next)=>{
 
 // Mengupdate akun
 exports.updateAccount = async ( req,res,next) =>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      const error = new Error("Validation Error");
+      error.statusCode = 500
+
+      error.message=errors.array()[0].msg;
+      return next(error); 
+  }
   const {account_id} = req.params;
   const {
     name,
     username,
     email,
+    password
    } = req.body
 
    try{
 
    
    const data = {
-    name,username,email
+    name,username,email,password
    }
 
    const updateAcc = await Accounts.update(data,{
