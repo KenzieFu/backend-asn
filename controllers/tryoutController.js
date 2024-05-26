@@ -5,10 +5,39 @@ const { urlLapis, bucketName } = require("../static");
 const {Storage} = require("@google-cloud/storage")
 const _ = require("lodash");
 const TryoutScore = require("../models/tryoutScore");
-const { QueryTypes } = require("@sequelize/core");
+const { QueryTypes, where } = require("@sequelize/core");
 
 const storage = new Storage();
 
+exports.freeTO = async(req,res,next)=>{
+  try{
+    const to = await Tryout.findAll({
+      where:{
+        tryout_type:"FREE"
+      }
+    })
+    return res.status(200).json({
+      data:to
+    })
+  }catch(err){
+    return next(err);
+  }
+}
+
+exports.paidTO = async(req,res,next)=>{
+  try{
+    const to = await Tryout.findAll({
+      where:{
+        tryout_type:"PAY"
+      }
+    })
+    return res.status(200).json({
+      data:to
+    })
+  }catch(err){
+    return next(err);
+  }
+}
 
 exports.finishedTryout  = async(req,res,next)=>{
   const {account_id } = req.params;

@@ -51,6 +51,12 @@ router.get("/tryouts/finished/:account_id",tryoutController.finishedTryout);
 //get bought tryout
 router.get("/tryouts/bought/:account_id",tryoutController.boughtTryout);
 
+//get free to
+router.get("/tryouts/free",tryoutController.freeTO);
+
+//get pay to
+router.get("/tryouts/pay",tryoutController.paidTO);
+
 
 //get leaderboard
 router.get("/leaderboard/:tryout_id",tryoutController.leaderBoardTryout);
