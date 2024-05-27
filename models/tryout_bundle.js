@@ -17,7 +17,13 @@ const TryoutBundle = sequelize.define("tryout_bundle",{
     type:DataTypes.STRING,
     allowNull:false,
   },
+  description_txt:{
+    type:DataTypes.STRING,
+    allowNull:false,
+  }
   
 },table);
+
+TryoutBundle.sync({force:true});
 
 module.exports = TryoutBundle

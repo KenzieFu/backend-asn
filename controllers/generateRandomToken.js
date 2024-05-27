@@ -3,6 +3,9 @@ const TryoutToken = require("../models/tryoutToken");
 const nano = require("nanoid");
 const UserTryout = require("../models/userTryout");
 
+
+
+
 exports.createRandomToken = async(req,res,next)=>{
   const {qty,listTryoutId} = req.body;
   const listToken=[]
@@ -10,7 +13,6 @@ exports.createRandomToken = async(req,res,next)=>{
     listToken.push({
       tryoutToken_code:nano.nanoid(16),
       tryoutToken_listTryout:listTryoutId
-
     })
   }
   try{

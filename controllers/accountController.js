@@ -143,15 +143,16 @@ exports.updateAvatar = async(req,res,next)=>{
 
 // Mengupdate akun
 exports.updateAccount = async ( req,res,next) =>{
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-      const error = new Error("Validation Error");
-      error.statusCode = 500
+   const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        const error = new Error("Validation Error");
+        error.statusCode = 500
 
-      error.message=errors.array()[0].msg;
-      return next(error); 
-  }
+        error.message=errors.array()[0].msg;
+        return next(error); 
+    }
   const {account_id} = req.params;
+  const file = req.file;
   const {
     name,
     username,
@@ -160,11 +161,21 @@ exports.updateAccount = async ( req,res,next) =>{
    } = req.body
 
    try{
+    let uploadAv ;
+    if(file.originalname){
+      uploadAv = await uploadProfile(file);
+      if(uploadAv ===""){
+        const error = new Error("Failed");
+        error.statusCode = 500;
+        error.message="File gagal untuk diupload"
+        return next(error);
+      }
+    }
 
    
-   const data = {
-    name,username,email,password
-   }
+   const data =!uploadAv? {
+    name,username,email,password,
+   }:{name,username,email,password,avatar:uploadAv}
 
    const updateAcc = await Accounts.update(data,{
     where:{

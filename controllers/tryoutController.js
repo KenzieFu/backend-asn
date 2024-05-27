@@ -11,11 +11,24 @@ const storage = new Storage();
 
 exports.freeTO = async(req,res,next)=>{
   try{
-    const to = await Tryout.findAll({
-      where:{
-        tryout_type:"FREE"
-      }
-    })
+    const to = await sequelize.query(
+      `
+      SELECT 
+      t.*,
+      (SELECT 
+        COUNT(ts.tryoutScore_id) 
+        FROM tryoutscore ts 
+        WHERE ts.account_id=1 AND ts.tryout_id=t.tryout_id   LIMIT 1) as isCleared ,
+        (SELECT 
+          COUNT(ut.userTryout_id) 
+          FROM usertryout ut
+          WHERE ut.account_id=1 AND ut.tryout_id=t.tryout_id  LIMIT 1) as accessed
+      FROM tryout t 
+      WHERE t.tryout_type = 'FREE'
+       GROUP BY t.tryout_id  
+     ORDER BY t.createdAt DESC ;`
+    )
+    
     return res.status(200).json({
       data:to
     })
@@ -25,12 +38,24 @@ exports.freeTO = async(req,res,next)=>{
 }
 
 exports.paidTO = async(req,res,next)=>{
+  const {account_id} = req.params;
   try{
-    const to = await Tryout.findAll({
-      where:{
-        tryout_type:"PAY"
-      }
-    })
+    const to = await sequelize.query(
+      `SELECT 
+      t.*,
+      (SELECT 
+        COUNT(ts.tryoutScore_id) 
+        FROM tryoutscore ts 
+        WHERE ts.account_id=${account_id} AND ts.tryout_id=t.tryout_id   LIMIT 1) as isCleared ,
+        (SELECT 
+          COUNT(ut.userTryout_id) 
+          FROM usertryout ut
+          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id  LIMIT 1) as accessed
+      FROM tryout t 
+      WHERE t.tryout_type = 'PAY'
+       GROUP BY t.tryout_id  
+      WHERE ORDER BY t.createdAt DESC ;`
+    )
     return res.status(200).json({
       data:to
     })

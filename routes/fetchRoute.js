@@ -5,6 +5,7 @@ const categoryController = require("../controllers/category");
 const subCategoryController = require("../controllers/subcategoryController");
 const courseController = require("../controllers/courseController");
 const tryoutController = require("../controllers/tryoutController");
+
 //Account
 // get all accounts
 router.get("/accounts",accountController.getAccounts);
