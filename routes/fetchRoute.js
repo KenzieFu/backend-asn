@@ -53,10 +53,10 @@ router.get("/tryouts/finished/:account_id",tryoutController.finishedTryout);
 router.get("/tryouts/bought/:account_id",tryoutController.boughtTryout);
 
 //get free to
-router.get("/tryouts/free",tryoutController.freeTO);
+router.get("/tryouts/free/account/:account_id",tryoutController.freeTO);
 
 //get pay to
-router.get("/tryouts/pay",tryoutController.paidTO);
+router.get("/tryouts/pay/account/:account_id",tryoutController.paidTO);
 
 
 //get leaderboard

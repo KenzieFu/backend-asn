@@ -5,6 +5,7 @@ const Course = require("./course")
 const SKDAnalysis = require("./skd_analysis")
 const SubCategory = require("./subCategory")
 const Tryout = require("./tryout")
+const TTBundle = require("./tryoutBundle_tryout")
 const TryoutScore = require("./tryoutScore")
 const UserTryout = require("./userTryout")
 
@@ -44,5 +45,10 @@ Course.hasMany(ClearedCourse,{foreignKey:"course_id"})
 //SKD analysis
 SKDAnalysis.belongsTo(SubCategory,{foreignKey:"subCategory_id"});
 SubCategory.hasMany(SKDAnalysis,{foreignKey:"subCategory_id"});
+
+//tryoutBundle and Tryout
+TTBundle.hasMany(Tryout,{through:"tryoutBundle_tryout"});
+
+
 
 
