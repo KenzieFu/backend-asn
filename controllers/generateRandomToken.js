@@ -2,6 +2,7 @@
 const TryoutToken = require("../models/tryoutToken");
 const nano = require("nanoid");
 const UserTryout = require("../models/userTryout");
+const sequelize = require("../database/database");
 
 
 
