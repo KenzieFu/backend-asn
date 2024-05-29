@@ -27,7 +27,7 @@ exports.createRandomToken = async(req,res,next)=>{
 }
 
 exports.redeemToken = async(req,res,next)=>{
-  const t = await sequelize.transaction();
+  const t = await sequelize.startUnmanagedTransaction();
   const{account_id} = req.params;
   const { tryoutToken_code} = req.body
   try{
@@ -64,12 +64,13 @@ exports.redeemToken = async(req,res,next)=>{
         transaction:t
       })
     )
-
+    await t.commit()
     res.status(200).json({
       message:"Berhasil Meredeem token"
     })
 
   }catch(err){
+    await t.rollback()
     next(err);
   }
 }
