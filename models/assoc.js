@@ -7,6 +7,7 @@ const SubCategory = require("./subCategory")
 const Tryout = require("./tryout")
 const TTBundle = require("./tryoutBundle_tryout")
 const TryoutScore = require("./tryoutScore")
+const TryoutBundle = require("./tryout_bundle")
 const UserTryout = require("./userTryout")
 
 
@@ -47,7 +48,7 @@ SKDAnalysis.belongsTo(SubCategory,{foreignKey:"subCategory_id"});
 SubCategory.hasMany(SKDAnalysis,{foreignKey:"subCategory_id"});
 
 //tryoutBundle and Tryout
-TTBundle.hasMany(Tryout,{through:"tryoutBundle_tryout"});
+TryoutBundle.hasMany(Tryout,{through:"tryoutBundle_tryout"});
 
 
 

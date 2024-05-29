@@ -82,7 +82,6 @@ router.post("/tokens/create",generateRandomToken.createRandomToken);
 router.post("/redeem/:account_id",generateRandomToken.redeemToken);
 
 
-
 //create bundle
 router.post("/bundle",bundleController.createTryoutBundle)
 

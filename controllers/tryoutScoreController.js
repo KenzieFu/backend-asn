@@ -4,6 +4,7 @@ const Account = require("../models/account");
 const SKDAnalysis = require("../models/skd_analysis");
 const TryoutScore = require("../models/tryoutScore");
 const Tryout = require("../models/tryout");
+const { Op } = require("@sequelize/core");
 const passed = 311
 //Ketika user sudah menyelesaikan tryout
 exports.tryoutFinished = async (req, res, next) => {
@@ -54,3 +55,29 @@ exports.tryoutFinished = async (req, res, next) => {
     next(err);
   }
 };
+exports.tryoutRecap = async(req,res,next)=>{
+  const {tryout_id,account_id}=req.params;
+  try{
+    const getRecap = await TryoutScore.findOne({
+      where:{
+        [Op.and]:{
+          account_id:account_id,
+          tryout_id:tryout_id
+        }
+        
+      }
+    });
+    if(!getRecap){
+      const error = new Error("Not Found");
+      error.statusCode = 500;
+      error.message="Gagal mengambil Hasil Tryout Anda";
+      return next(error);
+    }
+
+    return res.status(200).json({
+      data:getRecap
+    })
+  }catch(err){
+    next(err);
+  }
+}

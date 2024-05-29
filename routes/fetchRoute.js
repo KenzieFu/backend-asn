@@ -5,7 +5,7 @@ const categoryController = require("../controllers/category");
 const subCategoryController = require("../controllers/subcategoryController");
 const courseController = require("../controllers/courseController");
 const tryoutController = require("../controllers/tryoutController");
-
+const tryoutBundleController = require("../controllers/tryoutBundleController")
 //Account
 // get all accounts
 router.get("/accounts",accountController.getAccounts);
@@ -65,6 +65,8 @@ router.get("/leaderboard/:tryout_id",tryoutController.leaderBoardTryout);
 // get tryout recap
 router.get("/tryouts/stats/:tryout_id/:account_id",tryoutController.checkTryoutStats);
 
+//get bundle list
+router.get("/tryoutbundles",tryoutBundleController.fetchTryoutBundle);
 
 
 

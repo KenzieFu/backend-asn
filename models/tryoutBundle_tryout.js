@@ -16,15 +16,11 @@ const  TTBundle = sequelize.define("tryout",{
   tryout_id : {
     type:DataTypes.STRING(80),
     allowNull:false,
-  
   },
   tryoutBundle_id:{
     type:DataTypes.STRING(200),
-
   },
- 
-
-
 },table)
 
+// TTBundle.sync({force:true})
 module.exports=TTBundle

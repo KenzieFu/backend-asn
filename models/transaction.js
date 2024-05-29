@@ -18,11 +18,13 @@ const UserTransaction = sequelize.define("usertransaction",{
     allowNull:true,
 
   },
-  tryout_id:{
+  jumlah_to:{
     type:DataTypes.BIGINT,
-    onDelete:"setnull",
-    allowNull:true,
-  
+    allowNull:false,
+  },
+  listTryout:{
+    type:DataTypes.STRING,
+    allowNull:false
   },
   transaction_status:{
     type:DataTypes.ENUM("PAID","PENDING","FAILED"),

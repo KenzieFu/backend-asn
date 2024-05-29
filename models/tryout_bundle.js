@@ -17,10 +17,6 @@ const TryoutBundle = sequelize.define("tryout_bundle",{
     type:DataTypes.STRING,
     allowNull:false,
   },
-  listTryout :{
-    type:DataTypes.STRING,
-    allowNull:false,
-  },
   price:{
     type:DataTypes.BIGINT,
     allowNull:false
@@ -36,6 +32,6 @@ const TryoutBundle = sequelize.define("tryout_bundle",{
   
 },table);
 
-
+// TryoutBundle.sync({force:true})
 
 module.exports = TryoutBundle
