@@ -8,6 +8,7 @@ const clearedCourseController = require("../controllers/clearedCourseControllerr
 const tryoutController = require("../controllers/tryoutController");
 const generateRandomToken = require("../controllers/generateRandomToken");
 const { registerValidator } = require("../validator/rules");
+const bundleController = require("../controllers/tryoutBundleController");
 
 // ACCOUNT
 //create account
@@ -81,6 +82,9 @@ router.post("/tokens/create",generateRandomToken.createRandomToken);
 router.post("/redeem/:account_id",generateRandomToken.redeemToken);
 
 
+
+//create bundle
+router.post("/bundle",bundleController.createTryoutBundle)
 
 
 module.exports = router;

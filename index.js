@@ -17,6 +17,7 @@ const TryoutScore = require("./models/tryoutScore");
 const SKDAnalysis = require("./models/skd_analysis");
 const TryoutToken = require("./models/tryoutToken");
 const { updateAvatar } = require("./controllers/accountController");
+const TryoutBundle = require("./models/tryout_bundle");
 
 const app = express();
 const storage = multer.memoryStorage()
@@ -70,11 +71,13 @@ app.post("/tryouts",uploadMulter.single("tryout_file"),tryoutController.createTr
 app.post("/account/:account_id/avatar",uploadMulter.single("avatar"),updateAvatar)
 
 
+
 sequelize
   .authenticate()
   .then(() => {
     console.log("Connection has established successfully");
     app.listen(8080, () => {
+      // TryoutBundle.sync({force:true})
     
       console.log("backend-asn listen to 8080");
     });

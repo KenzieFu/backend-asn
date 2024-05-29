@@ -4,7 +4,7 @@ const Account = require("../models/account");
 const SKDAnalysis = require("../models/skd_analysis");
 const TryoutScore = require("../models/tryoutScore");
 const Tryout = require("../models/tryout");
-
+const passed = 311
 //Ketika user sudah menyelesaikan tryout
 exports.tryoutFinished = async (req, res, next) => {
   const t = await sequelize.transaction();
@@ -40,7 +40,8 @@ exports.tryoutFinished = async (req, res, next) => {
       tkp_score,
       twk_wrong,
       tiu_wrong,
-      tryout_score
+      tryout_score,
+      tryout_passed:tryout_score>=passed?"Passed":"Failed"
     }
     const addToTryout_score = await TryoutScore.create(toScore,{transaction:t});
     await t.commit()

@@ -21,6 +21,12 @@ const TryoutScore = sequelize.define("tryoutscore",{
     onDelete:"cascade",
 
   },
+  
+    tryout_passed:{
+      type:DataTypes.ENUM("Passed","Failed"),
+      allowNull:true
+    }
+  ,
   twk_score:{
     type:DataTypes.INTEGER,
 

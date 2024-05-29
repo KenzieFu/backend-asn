@@ -12,7 +12,7 @@
       "Java",
       "Kotlin"
     ],
-    "jb_index":2,
+    "jawaban":1,
     "option_image":true,
     
     "pembahasan":"Tidak Ada"
@@ -30,9 +30,7 @@
       "C#",
       "C"
     ],
-    "score":[
-      0,0,5,0,0
-    ],
+    "jawaban":2,
     "option_image":false,
     "pembahasan":"Tidak Ada"
   },
@@ -49,9 +47,7 @@
       "Bawaan dari kecil",
       "Menarik"
     ],
-    "score":[
-      5,0,0,0,0
-    ],
+    "jawaban":0,
     "option_image":false,
     "pembahasan":"Tidak Ada"
   },
@@ -68,9 +64,7 @@
       "4",
       "5"
     ],
-    "score":[
-      0,0,0,5,0
-    ],
+    "jawaban":3,
     "option_image":false,
     "pembahasan":"Tidak Ada"
   },
@@ -87,9 +81,7 @@
       "4",
       "7"
     ],
-    "score":[
-      0,5,0,0,0
-    ],
+    "jawaban":1,
     "option_image":false,
     "pembahasan":"Tidak Ada"
   },
@@ -106,9 +98,7 @@
       "4",
       "7"
     ],
-    "score":[
-      5,0,0,0,0
-    ],
+    "jawaban":0,
     "option_image":false,
     "pembahasan":"Tidak Ada"
   },
@@ -125,7 +115,7 @@
       "Maaf, belum bang/kak",
       "Kamu siapa ya?"
     ],
-    "score":[
+    "jawaban":[
       3,4,2,5,1
     ],
     "option_image":false,
@@ -144,7 +134,7 @@
       "Gak peduli",
       "Pura-pura gak tau"
     ],
-    "score":[
+    "jawaban":[
       1,2,5,4,3
     ],
     "option_image":false,
@@ -163,7 +153,7 @@
       "Menghiraukannya",
       "Membantunya"
     ],
-    "score":[
+    "jawaban":[
       3,1,2,4,5
     ],
     "option_image":false,

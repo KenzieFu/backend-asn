@@ -5,7 +5,8 @@ const { urlLapis, bucketName } = require("../static");
 const {Storage} = require("@google-cloud/storage")
 const _ = require("lodash");
 const TryoutScore = require("../models/tryoutScore");
-const { QueryTypes, where } = require("@sequelize/core");
+const { QueryTypes, where, Op } = require("@sequelize/core");
+const Account = require("../models/account");
 
 const storage = new Storage();
 
@@ -368,13 +369,18 @@ exports.changeTryout = async(req,res,next)=>{
 
 //get leaderboard
 exports.leaderBoardTryout = async (req,res,next)=>{
-  const {tryout_id } = req.params;
+  const {tryout_id} = req.params;
   try{
     const tryoutStandings = await TryoutScore.findAll({
       where:{
         tryout_id:tryout_id
-      }
+      },
+      include:[
+        {model:Account}
+      ],
+      orderBy:['tryout_score DESC']
     });
+   
 
   
 
@@ -396,14 +402,17 @@ exports.checkTryoutStats =async(req,res,next)=>{
           tryout_id:tryout_id,
           account_id:account_id
         }
-      }
+      },
+      include:[
+        {model:Tryout}
+      ]
     });
 
     if(!tryoutStats){
       const error =new Error("Not Found");
       error.statusCode =404;
       error.message="Score anda tidak ditemukan";
-      return next(err);
+      return next(error);
     }
 
     res.status(200).json({

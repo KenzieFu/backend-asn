@@ -40,9 +40,9 @@ exports.uploadFile = (file, pathName) =>
   new Promise(async (resolve, reject) => {
 
     let dateString = new Date().toISOString();
-    if(file.fieldname ==="course_image"){
+
       dateString=dateString.replaceAll(":","-");
-    }
+
     const storage = new Storage({ projectId, keyFilename: keyFilename });
     
     const { buffer, mimetype,originalname,fieldname } = file;
