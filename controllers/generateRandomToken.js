@@ -43,6 +43,12 @@ exports.redeemToken = async(req,res,next)=>{
       error.message = "Token tidak ditemukan / kadaluarsa"
       return next(error);
     }
+    if(checkToken.tryoutToken_status ==="REDEEMED"){
+      const error = new Error("Validation");
+      error.statusCode = 500
+      error.message = "Token telah di pakai"
+      return next(error);
+    }
 
     const updateToken = await TryoutToken.update({
       tryoutToken_status:"REDEEMED"

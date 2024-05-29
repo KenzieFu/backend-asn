@@ -78,8 +78,23 @@ FROM tryout_bundle tb;`,
         type: QueryTypes.SELECT,
       }
     );
+
+    const newBundle = bundles.map((data)=>{
+      const bundletTryout = data.listTryout_id.split(",");
+      const userClearedTryout = data.userBought.split(",");
+      const updatedPrice = Math.floor(data.tryout_price/bundletTryout.length) *userClearedTryout.length;
+
+      const boolBought =data.userBought == data.listTryout_id;
+      const changedPrice= data.userBought ===null?data.tryout_price:data.tryout_price-updatedPrice;
+
+      return {
+        ...data,
+        tryout_price:changedPrice,
+        boolBought:boolBought
+      }
+    })
     return res.status(200).json({
-      data: bundles,
+      data: newBundle,
     });
   } catch (err) {
     next(err);
