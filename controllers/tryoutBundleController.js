@@ -64,14 +64,14 @@ exports.createTryoutBundle = async (req, res, next) => {
 };
 
 exports.fetchTryoutBundle = async (req, res, next) => {
-  // const {account_id} = req.params;
+  const {account_id} = req.params;
   try {
     const bundles = await sequelize.query(
       `
     SELECT 
     tb.*,
     (SELECT GROUP_CONCAT(ttb.tryout_id SEPARATOR ",") FROM tryoutbundle_tryout ttb WHERE ttb.tryoutBundle_id=tb.tryoutBundle_id) as listTryout_id,
-    (SELECT GROUP_CONCAT(ut.tryout_id SEPARATOR ",") FROM usertryout ut WHERE ut.tryout_id IN (SELECT ttb.tryout_id FROM tryoutbundle_tryout ttb WHERE ttb.tryoutBundle_id=tb.tryoutBundle_id) AND ut.account_id=1) as userBought,
+    (SELECT GROUP_CONCAT(ut.tryout_id SEPARATOR ",") FROM usertryout ut WHERE ut.tryout_id IN (SELECT ttb.tryout_id FROM tryoutbundle_tryout ttb WHERE ttb.tryoutBundle_id=tb.tryoutBundle_id) AND ut.account_id=${account_id}) as userBought,
     (SELECT SUM(t.tryout_price) FROM tryout t WHERE t.tryout_id IN (SELECT ttb.tryout_id FROM tryoutbundle_tryout ttb WHERE ttb.tryoutBundle_id=tb.tryoutBundle_id)) as base_price
 FROM tryout_bundle tb;`,
       {
@@ -81,8 +81,9 @@ FROM tryout_bundle tb;`,
 
     const newBundle = bundles.map((data)=>{
       const bundletTryout = data.listTryout_id.split(",");
-      const userClearedTryout = data.userBought.split(",");
-      const updatedPrice = Math.floor(data.tryout_price/bundletTryout.length) *userClearedTryout.length;
+      const userClearedTryout = data.userBought?data.userBought.split(","):null;
+
+      const updatedPrice = Math.floor(data.tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
 
       const boolBought =data.userBought == data.listTryout_id;
       const changedPrice= data.userBought ===null?data.tryout_price:data.tryout_price-updatedPrice;
@@ -90,6 +91,8 @@ FROM tryout_bundle tb;`,
       return {
         ...data,
         tryout_price:changedPrice,
+        listTryout_id:bundletTryout,
+        userBought:userClearedTryout,
         boolBought:boolBought
       }
     })

@@ -66,7 +66,7 @@ router.get("/leaderboard/:tryout_id",tryoutController.leaderBoardTryout);
 router.get("/tryouts/stats/:tryout_id/:account_id",tryoutController.checkTryoutStats);
 
 //get bundle list
-router.get("/tryoutbundles",tryoutBundleController.fetchTryoutBundle);
+router.get("/tryoutbundles/:account_id",tryoutBundleController.fetchTryoutBundle);
 
 
 
