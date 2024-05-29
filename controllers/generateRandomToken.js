@@ -50,7 +50,7 @@ exports.redeemToken = async(req,res,next)=>{
       where:{
         tryoutToken_code:tryoutToken_code
       },
-      transaction:true
+      transaction:t
     });
     let splitTryout = checkToken.tryoutToken_listTryout.split(",")
     const userTryoutadd = await UserTryout.bulkCreate(
