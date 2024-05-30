@@ -76,6 +76,7 @@ exports.finishedTryout  = async(req,res,next)=>{
     const tryouts = await sequelize.query(
       `SELECT 
       t.*,
+      (SELECT ts.tryout_passed FROM tryoutscore ts WHERE ts.account_id=${account_id} AND ts.tryout_id=t.tryout_id ORDER BY ts.createdAt DESC LIMIT 1) as tryout_passed,
       (SELECT ts.tryout_score FROM tryoutscore ts WHERE ts.account_id=${account_id} AND ts.tryout_id=t.tryout_id ORDER BY ts.createdAt DESC LIMIT 1) as tryout_score,
       (SELECT 
         COUNT(ts.tryoutScore_id) 
