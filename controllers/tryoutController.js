@@ -11,6 +11,7 @@ const Account = require("../models/account");
 const storage = new Storage();
 
 exports.freeTO = async(req,res,next)=>{
+  const {account_id} = req.params
   try{
     const to = await sequelize.query(
       `
@@ -19,11 +20,11 @@ exports.freeTO = async(req,res,next)=>{
       (SELECT 
         COUNT(ts.tryoutScore_id) 
         FROM tryoutscore ts 
-        WHERE ts.account_id=1 AND ts.tryout_id=t.tryout_id   LIMIT 1) as isCleared ,
+        WHERE ts.account_id=${account_id} AND ts.tryout_id=t.tryout_id   LIMIT 1) as isCleared ,
         (SELECT 
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
-          WHERE ut.account_id=1 AND ut.tryout_id=t.tryout_id  LIMIT 1) as accessed
+          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id  LIMIT 1) as accessed
       FROM tryout t 
       WHERE t.tryout_type = 'FREE'
        GROUP BY t.tryout_id  
@@ -75,6 +76,7 @@ exports.finishedTryout  = async(req,res,next)=>{
     const tryouts = await sequelize.query(
       `SELECT 
       t.*,
+      (SELECT ts.tryout_score FROM tryoutscore ts WHERE ts.account_id=${account_id} AND ts.tryout_id=t.tryout_id ORDER BY ts.createdAt DESC LIMIT 1) as tryout_score,
       (SELECT 
         COUNT(ts.tryoutScore_id) 
         FROM tryoutscore ts 
@@ -185,7 +187,7 @@ exports.getTryout = async(req,res,next)=>{
       (SELECT 
         COUNT(ts.tryoutScore_id) 
         FROM tryoutscore ts 
-        WHERE ts.account_id=${account_id}  LIMIT 1) as isCleared ,
+        WHERE ts.account_id=${account_id} AND ts.tryout_id=${tryout_id}  LIMIT 1) as isCleared ,
         (SELECT 
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
