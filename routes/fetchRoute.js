@@ -53,10 +53,10 @@ router.get("/tryouts/finished/:account_id",tryoutController.finishedTryout);
 router.get("/tryouts/bought/:account_id",tryoutController.boughtTryout);
 
 //get free to
-router.get("/tryouts/free/account/:account_id",tryoutController.freeTO);
+router.get("/freeTryouts/account/:account_id",tryoutController.freeTO);
 
 //get pay to
-router.get("/tryouts/pay/account/:account_id",tryoutController.paidTO);
+router.get("/payTryouts/account/:account_id",tryoutController.paidTO);
 
 
 //get leaderboard
@@ -66,7 +66,7 @@ router.get("/leaderboard/:tryout_id",tryoutController.leaderBoardTryout);
 router.get("/tryouts/stats/:tryout_id/:account_id",tryoutController.checkTryoutStats);
 
 //get bundle list
-router.get("/tryoutbundles/:account_id",tryoutBundleController.fetchTryoutBundle);
+router.get("/tryoutbundles/account/:account_id",tryoutBundleController.fetchTryoutBundle);
 
 
 

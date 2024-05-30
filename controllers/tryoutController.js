@@ -55,7 +55,7 @@ exports.paidTO = async(req,res,next)=>{
       FROM tryout t 
       WHERE t.tryout_type = 'PAY'
        GROUP BY t.tryout_id  
-      WHERE ORDER BY t.createdAt DESC ;`
+      ORDER BY t.createdAt DESC ;`
     )
     return res.status(200).json({
       data:to
