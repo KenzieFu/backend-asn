@@ -27,7 +27,9 @@ exports.freeTO = async(req,res,next)=>{
       FROM tryout t 
       WHERE t.tryout_type = 'FREE'
        GROUP BY t.tryout_id  
-     ORDER BY t.createdAt DESC ;`
+     ORDER BY t.createdAt DESC ;`,{
+      type:QueryTypes.SELECT
+     }
     )
     
     return res.status(200).json({
@@ -55,7 +57,9 @@ exports.paidTO = async(req,res,next)=>{
       FROM tryout t 
       WHERE t.tryout_type = 'PAY'
        GROUP BY t.tryout_id  
-      ORDER BY t.createdAt DESC ;`
+      ORDER BY t.createdAt DESC ;`,{
+        type:QueryTypes.SELECT
+       }
     )
     return res.status(200).json({
       data:to
