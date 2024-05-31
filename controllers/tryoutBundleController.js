@@ -87,13 +87,14 @@ FROM tryout_bundle tb WHERE tb.tryoutBundle_id = ${tryoutBundle_id} LIMIT 1 ;`,
 
       const boolBought =bundles.userBought == bundles.listTryout_id;
       const changedPrice= bundles.userBought ===null?bundles.tryout_price:bundles.tryout_price-updatedPrice;
-
+      const split = bundles.descList.split(",");
       const newData= {
         ...bundles,
         tryout_price:changedPrice,
         listTryout_id:bundletTryout,
         userBought:userClearedTryout,
-        boolBought:boolBought
+        boolBought:boolBought,
+        descList:split
       }
     
     return res.status(200).json({
