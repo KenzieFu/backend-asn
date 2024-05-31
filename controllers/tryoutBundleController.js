@@ -126,7 +126,7 @@ FROM tryout_bundle tb;`,
       const userClearedTryout = data.userBought?data.userBought.split(","):null;
 
       const updatedPrice = Math.floor(data.tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
-
+      const split = bundles.descList.split(",");
       const boolBought =data.userBought == data.listTryout_id;
       const changedPrice= data.userBought ===null?data.tryout_price:data.tryout_price-updatedPrice;
 
@@ -135,7 +135,8 @@ FROM tryout_bundle tb;`,
         tryout_price:changedPrice,
         listTryout_id:bundletTryout,
         userBought:userClearedTryout,
-        boolBought:boolBought
+        boolBought:boolBought,
+        descList:split
       }
     })
     return res.status(200).json({
