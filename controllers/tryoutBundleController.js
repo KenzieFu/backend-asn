@@ -80,16 +80,16 @@ FROM tryout_bundle tb WHERE tb.tryoutBundle_id = ${tryoutBundle_id} LIMIT 1 ;`,
     );
 
  
-      const bundletTryout = bundles.listTryout_id.split(",");
-      const userClearedTryout = bundles.userBought?bundles.userBought.split(","):null;
+      const bundletTryout = bundles[0].listTryout_id.split(",");
+      const userClearedTryout = bundles[0].userBought?bundles[0].userBought.split(","):null;
 
-      const updatedPrice = Math.floor(bundles.tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
+      const updatedPrice = Math.floor(bundles[0].tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
 
-      const boolBought =bundles.userBought == bundles.listTryout_id;
-      const changedPrice= bundles.userBought ===null?bundles.tryout_price:bundles.tryout_price-updatedPrice;
-      const split = bundles.descList.split(",");
+      const boolBought =bundles[0].userBought == bundles[0].listTryout_id;
+      const changedPrice= bundles[0].userBought ===null?bundles[0].tryout_price:bundles[0].tryout_price-updatedPrice;
+      const split = bundles[0].descList.split(",");
       const newData= {
-        ...bundles,
+        ...bundles[0],
         tryout_price:changedPrice,
         listTryout_id:bundletTryout,
         userBought:userClearedTryout,
@@ -126,14 +126,14 @@ FROM tryout_bundle tb;`,
       const userClearedTryout = data.userBought?data.userBought.split(","):null;
 
       const updatedPrice = Math.floor(data.tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
-      const split = bundles.descList.split(",");
+      const split = data.descList.split(",");
       const boolBought =data.userBought == data.listTryout_id;
       const changedPrice= data.userBought ===null?data.tryout_price:data.tryout_price-updatedPrice;
 
       return {
         ...data,
-        tryout_price:changedPrice,
-        listTryout_id:bundletTryout,
+        tryout_price:changedPrice, 
+        listTryout_id:bundletTryout, 
         userBought:userClearedTryout,
         boolBought:boolBought,
         descList:split
