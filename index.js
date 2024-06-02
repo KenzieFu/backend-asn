@@ -147,6 +147,9 @@ Course.hasMany(ClearedCourse,{foreignKey:"course_id"})
 SKDAnalysis.belongsTo(SubCategory,{foreignKey:"subCategory_id"});
 SubCategory.hasMany(SKDAnalysis,{foreignKey:"subCategory_id"});
 
+//SKD anlaysis
+SKDAnalysis.belongsTo(Tryout,{foreignKey:"tryout_id"});
+
 //tryoutBundle and Tryout
 TryoutBundle.belongsToMany(Tryout,{through:"tryoutBundle_tryout"});
 // UserTransaction.sync({force:true})

@@ -29,6 +29,10 @@ const SKDAnalysis = sequelize.define("skd_analysis",{
   subCategory_score:{
     type:DataTypes.INTEGER,
   },
+  tryout_id:{
+    type:DataTypes.BIGINT,
+    allowNull:false
+  }
 
 },table);
 
