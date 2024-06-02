@@ -168,6 +168,14 @@ exports.historyTransaksi = async(req,res,next)=>{
         ['createdAt', 'DESC'],
       ]
     });
+
+    const mapes = history.map((his)=>{
+      const ltryout = his.listTryout.replaceAll("").split(",");
+      return {
+        ...his,
+        listTryout:ltryout
+      }
+    })
     return res.status(200).json({
       data:history
     })
