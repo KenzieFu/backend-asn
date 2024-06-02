@@ -100,7 +100,7 @@ app.put("/account/:account_id/avatar",uploadMulter.single("avatar"),updateAvatar
 // buy tryout
 //req.params  = account_id
 // const {transaction_title,listTryout,transaction_price} = req.body;
-app.post("/tryouts/transaction/:account_id",transController.buyTryout)
+app.post("/tryouts/transaction/:account_id",uploadMulter.single('bukti_transaksi'),transController.buyTryout)
 
 
 
