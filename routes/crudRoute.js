@@ -10,6 +10,7 @@ const generateRandomToken = require("../controllers/generateRandomToken");
 const { registerValidator } = require("../validator/rules");
 const bundleController = require("../controllers/tryoutBundleController");
 const transController = require("../controllers/transaction")
+const tryoutScoreController =require("../controllers/tryoutScoreController")
 // ACCOUNT
 //create account
 router.post("/accounts",registerValidator,accountController.createAccount);
@@ -74,7 +75,7 @@ router.put("/tryouts/:tryout_id",tryoutController.changeTryout)
 
 //Tryout Score
 //cleared a tryout
-router.post("/tryouts/cleared/:tryout_id/:account_id",tryoutController.finishedTryout);
+router.post("/tryouts/cleared/:tryout_id/:account_id",tryoutScoreController.tryoutFinished);
 
 //Random Token 
 router.post("/tokens/create",generateRandomToken.createRandomToken);
