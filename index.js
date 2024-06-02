@@ -93,7 +93,7 @@ app.post("/courses",uploadMulter.single("course_image"),courseController.createC
 app.put("/courses/content/:course_id",uploadMulter.single("course_file"),courseController.assignCourseContent);
 
 //update account
-router.put("/accounts/:account_id",uploadMulter.single("avatar"),accountController.updateAccount);
+app.put("/accounts/:account_id",uploadMulter.single("avatar"),accountController.updateAccount);
 
 //create tryout
 app.post("/tryouts",uploadMulter.single("tryout_file"),tryoutController.createTryout);
