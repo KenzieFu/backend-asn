@@ -43,7 +43,7 @@ exports.createTryoutBundle = async (req, res, next) => {
     if (listTryout.length != 0) {
       const addTryoutToBundle = await TTBundle.bulkCreate(
         listTryout.map((toId) => {
-          return {
+          return { 
             tryout_id: toId.toString(),
             tryoutBundle_id: newBundle.tryoutBundle_id,
           };

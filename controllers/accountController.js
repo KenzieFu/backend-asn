@@ -2,8 +2,9 @@ const bcryptjs = require("bcryptjs")
 const Accounts = require("../models/account");
 const { where } = require("@sequelize/core");
 const Account = require("../models/account");
-const { uploadProfile } = require("../helper/helper");
+const { uploadProfile, uploadFILE, uploadFile } = require("../helper/helper");
 const { validationResult } = require("express-validator");
+const { urlLapis, bucketName } = require("../static");
 
 
 
@@ -107,6 +108,11 @@ exports.getAccount =async (req,res,next)=>{
       return next(error);
 
     }
+    if(account.avatar){
+
+      account.avatar = `${urlLapis}/${bucketName}/${account.avatar}`
+      
+    }
     res.status(200).json({
       data:account
     });
@@ -125,19 +131,20 @@ exports.updateAvatar = async(req,res,next)=>{
     const error = new Error("Failed");
     error.statusCode = 500;
     error.message="File tidak ditemukan"
-    next(error);
+    return next(error);
 
   }
-  const uploadAv = await uploadProfile(file);
+  console.log(file)
+  const uploadAv = await uploadFILE(file,"profile");
   if(uploadAv ===""){
     const error = new Error("Failed");
     error.statusCode = 500;
     error.message="File gagal untuk diupload"
-    next(error);
+    return next(error);
   }
   const updateAccount = await Account.update({avatar:uploadAv},{where:{account_id:account_id}});
   return res.status(200).json({
-    message:"Berhasil mengubah Avatar"
+    message:"Berhasil mengubah Avatar" 
   })
 }
 
@@ -163,7 +170,7 @@ exports.updateAccount = async ( req,res,next) =>{
    try{
     let uploadAv ;
     if(file.originalname){
-      uploadAv = await uploadProfile(file);
+      uploadAv = await uploadFILE(file,"profile");
       if(uploadAv ===""){
         const error = new Error("Failed");
         error.statusCode = 500;

@@ -9,10 +9,11 @@ const tryoutController = require("../controllers/tryoutController");
 const generateRandomToken = require("../controllers/generateRandomToken");
 const { registerValidator } = require("../validator/rules");
 const bundleController = require("../controllers/tryoutBundleController");
-
+const transController = require("../controllers/transaction")
 // ACCOUNT
 //create account
 router.post("/accounts",registerValidator,accountController.createAccount);
+
 
 //delete account
 router.delete("/accounts/:account_id",accountController.deleteAccount);
@@ -84,6 +85,13 @@ router.post("/redeem/:account_id",generateRandomToken.redeemToken);
 
 //create bundle
 router.post("/bundle",bundleController.createTryoutBundle)
+
+
+// admin update status Transaksi
+//byk validasi
+// req.params = transactionRecord_id 
+//req.body =  transaction_status
+router.put("/updateTransaction/:transactionRecord_id",transController.updateTransaksi);
 
 
 module.exports = router;

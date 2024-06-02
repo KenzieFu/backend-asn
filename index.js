@@ -17,6 +17,7 @@ const UserTryout = require("./models/userTryout")
 //Controller
 const courseController = require("./controllers/courseController");
 const tryoutController = require("./controllers/tryoutController")
+const transController = require("./controllers/transaction")
 
 //Route
 const authRoute = require("./routes/autRoute");
@@ -24,14 +25,28 @@ const fetchRoute = require("./routes/fetchRoute")
 const crudRoute = require("./routes/crudRoute")
 
 const multer = require("multer");
-
+const whitelist = [
+  'image/png',
+  'image/jpeg',
+  'image/jpg',
+  'image/webp'
+]
 const { updateAvatar } = require("./controllers/accountController");
+const UserTransaction = require("./models/transaction");
 
 
 const app = express();
 const storage = multer.memoryStorage()
 
-const uploadMulter= multer({storage:storage})
+const uploadMulter= multer({
+  storage:storage,
+  fileFilter:(req,file,cb)=>{
+    if(!whitelist.includes(file.mimetype)){
+      return cb(new Error('file is not allowed'))
+    }
+    cb(null,true)
+  }
+})
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -50,6 +65,8 @@ app.get("/",(req,res,next)=>{
     message:"success"
   })
 })
+
+
 
 
 // Auth Route
@@ -77,7 +94,13 @@ app.put("/courses/content/:course_id",uploadMulter.single("course_file"),courseC
 //create tryout
 app.post("/tryouts",uploadMulter.single("tryout_file"),tryoutController.createTryout);
 
-app.post("/account/:account_id/avatar",uploadMulter.single("avatar"),updateAvatar)
+app.put("/account/:account_id/avatar",uploadMulter.single("avatar"),updateAvatar)
+
+
+// buy tryout
+//req.params  = account_id
+// const {transaction_title,listTryout,transaction_price} = req.body;
+app.post("/tryouts/transaction/:account_id",transController.buyTryout)
 
 
 
@@ -126,6 +149,8 @@ SubCategory.hasMany(SKDAnalysis,{foreignKey:"subCategory_id"});
 
 //tryoutBundle and Tryout
 TryoutBundle.belongsToMany(Tryout,{through:"tryoutBundle_tryout"});
+// UserTransaction.sync({force:true})
+
       console.log("backend-asn listen to 8080");
     });
   })

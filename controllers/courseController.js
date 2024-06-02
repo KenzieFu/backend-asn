@@ -5,6 +5,7 @@ const Course = require("../models/course");
 const fs = require("fs");
 const { urlLapis, bucketName } = require("../static");
 
+
 exports.getCourses = async (req,res,next)=>{
   const {category_id,account_id} = req.params;
   try{
@@ -21,9 +22,15 @@ exports.getCourses = async (req,res,next)=>{
         type: QueryTypes.SELECT,
       }
     );
+    const filtered = courses.map((course)=>{
+      return {
+        ...course,
+        course_image:`${urlLapis}/${bucketName}/${course.course_image}`
+      }
+    })
     
     res.status(200).json({
-      data:courses
+      data:filtered
     })
   }catch(err){
     next(err);

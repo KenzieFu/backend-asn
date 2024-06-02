@@ -18,6 +18,10 @@ const UserTransaction = sequelize.define("usertransaction",{
     allowNull:true,
 
   },
+  transaction_title:{
+    type:DataTypes.STRING,
+    allowNull:false,
+  },
   jumlah_to:{
     type:DataTypes.BIGINT,
     allowNull:false,
@@ -26,14 +30,18 @@ const UserTransaction = sequelize.define("usertransaction",{
     type:DataTypes.STRING,
     allowNull:false
   },
+  bukti_transaski:{
+    type:DataTypes.STRING,
+    allowNull:false
+  },
   transaction_status:{
-    type:DataTypes.ENUM("PAID","PENDING","FAILED"),
+    type:DataTypes.ENUM("SUKSES","SEDANG DIPROSES","GAGAL"),
   },
   transaction_price:{
     type:DataTypes.FLOAT,
   }
 
 },table)
-// UserTransaction.sync({force:true})
+
 // UserTransaction.belongsTo(Account,{foreignKey:"account_id"});
 module.exports = UserTransaction; 

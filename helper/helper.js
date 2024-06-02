@@ -6,7 +6,8 @@ const path = require("path");
 const { nanoid } = require("nanoid");
 
 
-exports.uploadProfile = (file) => new Promise(async (resolve, reject) => {
+
+exports.uploadFILE = (file,path) => new Promise(async (resolve, reject) => {
 
   const reandom = nanoid()+path.extname(file.originalname);
   const storage = new Storage({ projectId, keyFilename: keyFilename });
@@ -15,7 +16,7 @@ exports.uploadProfile = (file) => new Promise(async (resolve, reject) => {
 
   
   const bucket = storage.bucket(bucketName);
-  const blob = bucket.file(`profile/${reandom}`);
+  const blob = bucket.file(`${path}/${reandom}`);
  
   console.log(`File upload START: `, new Date());
   blob.save(
@@ -33,7 +34,7 @@ exports.uploadProfile = (file) => new Promise(async (resolve, reject) => {
       }
     }
   );
-  resolve(`https://storage.googleapis.com/${bucketName}/profile/${reandom}`);
+  resolve(`${path}/${reandom}`);
 });
 
 exports.uploadFile = (file, pathName) =>

@@ -228,14 +228,14 @@ exports.getQuiz = async(req,res,next)=>{
     const tiu = datafile.filter((data)=>data.category ==="TIU");
     const tkp = datafile.filter((data)=>data.category ==="TKP");
 
-    const randomTIU =_.shuffle(tiu);
-    const randomTWK =_.shuffle(twk);
-    const randomTKP =_.shuffle(tkp);
+    // const randomTIU =_.shuffle(tiu);
+    // const randomTWK =_.shuffle(twk);
+    // const randomTKP =_.shuffle(tkp);
 
     const finalQuiz = [
-      ...randomTIU,
-      ...randomTWK,
-      ...randomTKP
+      ...tiu,
+      ...twk,
+      ...tkp
     ]
   const newTo={
     tryout_id:tryout.tryout_id,
