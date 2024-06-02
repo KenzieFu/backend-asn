@@ -18,6 +18,7 @@ const UserTryout = require("./models/userTryout")
 const courseController = require("./controllers/courseController");
 const tryoutController = require("./controllers/tryoutController")
 const transController = require("./controllers/transaction")
+const accountController  = require("./controllers/accountController")
 
 //Route
 const authRoute = require("./routes/autRoute");
@@ -91,10 +92,13 @@ app.post("/courses",uploadMulter.single("course_image"),courseController.createC
 // assign course content
 app.put("/courses/content/:course_id",uploadMulter.single("course_file"),courseController.assignCourseContent);
 
+//update account
+router.put("/accounts/:account_id",uploadMulter.single("avatar"),accountController.updateAccount);
+
 //create tryout
 app.post("/tryouts",uploadMulter.single("tryout_file"),tryoutController.createTryout);
 
-app.put("/account/:account_id/avatar",uploadMulter.single("avatar"),updateAvatar)
+
 
 
 // buy tryout
