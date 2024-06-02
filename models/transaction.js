@@ -30,7 +30,7 @@ const UserTransaction = sequelize.define("usertransaction",{
     type:DataTypes.STRING,
     allowNull:false
   },
-  bukti_transaski:{
+  bukti_transaksi:{
     type:DataTypes.STRING,
     allowNull:false
   },
