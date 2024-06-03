@@ -4,6 +4,7 @@ const Tryout = require("../models/tryout");
 const UserTryout = require("../models/userTryout");
 const sequelize = require("../database/database");
 const Account = require("../models/account")
+
 exports.buyTryout = async (req,res,next)=>{
   const {account_id} = req.params;
   const {transaction_title,listTryout,transaction_price} = req.body;

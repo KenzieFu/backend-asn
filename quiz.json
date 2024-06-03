@@ -1,162 +1,151 @@
 [
   {
-    "tryout_num":"1",
-    "question_image":"q1.png",
-    "subCategory_id":"1",
-    "category":"TIU",
-    "question":"Tailwind merupakan salah satu framework dari?",
-    "option":[
-      "HTML",
-      "CSS",
-      "Javascript",
-      "Java",
-      "Kotlin"
-    ],
-    "jawaban":1,
-    "option_image":true,
-    
-    "pembahasan":"Tidak Ada"
-  },
+    "tryout_num": 1,
+    "subCategory_id": 10,
+    "category": 2,
+    "question": "Sejalan dengan perubahan politik pemerintah kolonial, Wahidin Sudirohusodo, yang sejak tahun 1901 menjadi redaktur majalah Retnodhumilah, melalui majalahnya mempropagandakan pentingnya....",
+    "option": "['kesehatan', 'koperasi', 'pendidikan', 'politik', 'militer']",
+    "jawaban": 2,
+    "option_image": 0,
+    "pembahasan": "Sejalan dengan perubahan politik pemerintah kolonial yang hendak memajukan bidang pendidikan, dokter Wahidin Sudirohusodo yang sejak tahun 1901 menjadi redaktur majalah Retnodhumilah, melalui majalahnya ia mempropagandakan pentingnya pendidikan. Menurut pendapatnya bahwa pendidikan merupakan kunci kemajuan, diperlukan pendidikan secukupnya bagi kalangan luas orang pribumi. la mempropagandakan tentang pemberian beasiswa bagi pemuda-pemuda yang pandai tetapi tidak mampu."
+   },
+   {
+    "tryout_num": 2,
+    "subCategory_id": 10,
+    "category": 2,
+    "question": "Perkembangan Perhimpunan Indonesia menjadi organisasi politik terutama merupakan hasil usaha....",
+    "option": "['Sutomo', 'Iwa Kusumasumantri', 'Nazir Datuk Pamuncak', 'Muhammad Hatta', 'Sukiman Wiryosanjoyo']",
+    "jawaban": 3,
+    "option_image": 0,
+    "pembahasan": "Perkembangan Perhimpunan Indonesia menjadi organisasi politik terutama merupakan hasil usaha Muhammad Hatta. Kegiatan Perhimpunan Indonesia diarahkan untuk mencapai tiga tujuan, pertama, menyadarkan mahasiswa agar semakin percaya merasa diri sebagai orang Indonesia. Kedua, Perhimpunan Indonesia harus berusaha menghapuskan gambaran tentang Indonesia yang diciptakan oleh pemerintah Belanda. Ketiga, yang terpenting adalah mereka harus mengembangkan ideologi yang kuat dan bebas dari pembatasan-pembatasan Islam dan komunisme."
+   },
+   {
+    "tryout_num": 3,
+    "subCategory_id": 10,
+    "category": 2,
+    "question": "Ketua Indische Vereeniging, Nazir Datuk Pamuncak, menegaskan politik ... sebagai sendi perjuangan rakyat Indonesia.",
+    "option": "['etis', 'divide et impera', 'solidaritas', 'swadaya', 'nonkoperasi']",
+    "jawaban": 4,
+    "option_image": 0,
+    "pembahasan": "Ketua Indische Vereeniging Nazir Pamoncak menegaskan politik nonkoperasi sebagai sendi perjuangan rakyat Indonesia. Kerjasama dengan si penjajah untuk mencapai cita-cita kemerdekaan Indonesia, tidak lain dari menipu diri sendiri. Kerjasama hanya mungkin antara dua golongan yang sama hak, kewajibannya, dan kepentingannya. Apabila syarat ini tidak dipenuhi, maka kerja sama berarti mempermainkan yang lemah oleh yang kuat, memperlakukan yang lemah sebagai alat untuk kepentingannya sendiri. Sebab itu Indische Vereeniging menolak kerjasama dan tetap menuju tujuan sendiri."
+   },
+   {
+    "tryout_num": 4,
+    "subCategory_id": 10,
+    "category": 2,
+    "question": "Penyerbuan Jepang ke Hindia Belanda diawali dengan serangan ke Labuan, Brunei, Singapura, Semenanjung Malaya, Palembang, Tarakan, dan Balikpapan yang merupakan daerah-daerah sumber ...",
+    "option": "['beras', 'minyak', 'air', 'persenjataan', 'teknologi']",
+    "jawaban": 1,
+    "option_image": 0,
+    "pembahasan": "Penyerbuan Jepang ke Hindia Belanda diawali dengan serangan ke Labuan, Brunei, Singapura, Semenanjung Malaya, Palembang, Tarakan, dan Balikpapan yang merupakan daerah-daerah sumber minyak. Jepang sengaja mengambil taktik tersebut sebagai taktik gurita yang bertujuan mengisolasi kekuatan Hindia Belanda dan Sekutunya yang tergabung dalam front ABDA(America (Amerika Serikat), British (Inggris), Dutch (Belanda), Australia) yang berkedudukan di Bandung."
+   },
+   {
+    "tryout_num": 5,
+    "subCategory_id": 10,
+    "category": 2,
+    "question": "Kepercayaan Animisme di Indonesia berakulturasi dengan budaya Hindu-Buddha dalam bentuk....",
+    "option": "['patung dan arca', 'seni tari', 'seni musik', 'pahat dan relief', 'lukisan']",
+    "jawaban": 0,
+    "option_image": 0,
+    "pembahasan": "Kepercayaan animisme merupakan kepercayaan terhadap roh nenek moyang. Kepercayaan animisme yang ada di Indonesia, berakulturasi dengan budaya Hindu-Buddha, salah satunya dalam bentuk patung dan arca-arca yang dipercaya sebagai wujud roh nenek moyang."
+   },
+   {
+    "tryout_num": 6,
+    "subCategory_id": 10,
+    "category": 2,
+    "question": "Peristiwa Perang Bubat terjadi pada masa pemerintahan....",
+    "option": "['Hayam Wuruk', 'Gajah Mada', 'Raja Pajajaran', 'Balaputradewa', 'Prabu Maharaja Linggabuana']",
+    "jawaban": 0,
+    "option_image": 0,
+    "pembahasan": "Peristiwa Bubat atau yang dikenal Perang Bubat adalah peristiwa perselisihan antara Gajah Mada dengan Raja Pajajaran yang terjadi pada masa pemerintahan Raja Majapahit, yaitu Hayam Wuruk. Perang terjadi di pesanggrahan Bubat sehingga dikenal dengan sebutan Perang Bubat."
+   },
+   {
+    "tryout_num": 7,
+    "subCategory_id": 11,
+    "category": 2,
+    "question": "Sisi negatif yang harus dihindari dalam menghadapi kemajuan teknologi saat ini adalah …",
+    "option": "['Proaktif', 'Eksklusivisme', 'Kuriositas', 'Adaptif', 'Profesionalisme']",
+    "jawaban": 1,
+    "option_image": 0,
+    "pembahasan": "Ekslusivisme berarti paham yang mempunyai kecenderungan untuk memisahkan diri dari masyarakat: di kota besar terdapat gejala, terutama pada orang yang berada."
+   },
+   {
+    "tryout_num": 8,
+    "subCategory_id": 11,
+    "category": 2,
+    "question": "Nasionalisme adalah cerminan dari sila pancasila yang...",
+    "option": "['Pertama', 'Kedua', 'Ketiga', 'Keempat', 'Kelima']",
+    "jawaban": 2,
+    "option_image": 0,
+    "pembahasan": "Nasionalisme adalah upaya setiap warga negara untuk mencintai dan mempertahankan kedaulatan negaranya. Ini sesuai dengan cita-cita Pancasila untuk menciptakan persatuan dan kesatuan."
+   },
+   {
+    "tryout_num": 9,
+    "subCategory_id": 11,
+    "category": 2,
+    "question": "Seorang prajurit yang menolak perintah atas dasar kepatuhan pada hukum dan etika yang berlaku dalam konflik yang tidak sesuai dengan nilai-nilai kemanusiaan dan keadilan, mengikuti prinsip...",
+    "option": "['Kesetiaan buta', 'Disiplin militer', 'Patriotisme absolut', 'Kepatuhan absolut', 'Etika pertempuran']",
+    "jawaban": 4,
+    "option_image": 0,
+    "pembahasan": "Seorang prajurit yang menolak perintah yang bertentangan dengan nilai-nilai kemanusiaan dan keadilan mengikuti prinsip etika pertempuran, yang menekankan pentingnya menjaga moralitas dan kebenaran dalam setiap tindakan yang dilakukan dalam konteks pertempuran."
+   },
+   {
+    "tryout_num": 10,
+    "subCategory_id": 11,
+    "category": 2,
+    "question": "Pertahanan negara merupakan sebuah sistem yang penting bagi negara karena upaya pembelaan terhadap negara demi menjamin keberlangsungan hidup warga negara dalam menjalankan fungsi fungsi negara lainya merupkan esensi ....",
+    "option": "['Rasional', 'Vital', 'Moral', 'Kontektual', 'Empirik']",
+    "jawaban": 1,
+    "option_image": 0,
+    "pembahasan": "Upaya pertahanan negara sebagai bentuk penjaminan terhadap keberlangsungan hidup warga negara beserta fungsi fungsinya merupakan esensi vital."
+   },
   {
-    "tryout_num":"2",
-    "question_image":"",
-    "subCategory_id":"1",
-    "category":"TIU",
-    "question":"Berikut yang bukan merupakan bahasa pemrogramana?",
-    "option":[
-      "C++",
-      "Javascript",
-      "Piton",
-      "C#",
-      "C"
-    ],
-    "jawaban":2,
-    "option_image":false,
-    "pembahasan":"Tidak Ada"
-  },
-  {
-    "tryout_num":"3",
-    "question_image":"",
-    "subCategory_id":"3",
-    "category":"TIU",
-    "question":"Mengapa Clean Code itu penting?",
-    "option":[
-      "Memudahkan keterbacaan pada kode",
-      "Karena ngetrend",
-      "Keren",
-      "Bawaan dari kecil",
-      "Menarik"
-    ],
-    "jawaban":0,
-    "option_image":false,
-    "pembahasan":"Tidak Ada"
-  },
-  {
-    "tryout_num":"4",
-    "question_image":"",
-    "subCategory_id":"12",
-    "category":"TWK",
-    "question":"2+2?",
-    "option":[
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ],
-    "jawaban":3,
-    "option_image":false,
-    "pembahasan":"Tidak Ada"
-  },
-  {
-    "tryout_num":"5",
-    "question_image":"",
-    "subCategory_id":"11",
-    "category":"TWK",
-    "question":"2+3?",
-    "option":[
-      "1",
-      "5",
-      "3",
-      "4",
-      "7"
-    ],
-    "jawaban":1,
-    "option_image":false,
-    "pembahasan":"Tidak Ada"
-  },
-  {
-    "tryout_num":"6",
-    "question_image":"",
-    "subCategory_id":"11",
-    "category":"TWK",
-    "question":"2+0?",
-    "option":[
-      "2",
-      "5",
-      "3",
-      "4",
-      "7"
-    ],
-    "jawaban":0,
-    "option_image":false,
-    "pembahasan":"Tidak Ada"
-  },
-  {
-    "tryout_num":"7",
-    "question_image":"",
-    "subCategory_id":"17",
-    "category":"TKP",
-    "question":"Apa kamu sudah hebat?",
-    "option":[
-      "Ya",
-      "Tidak",
-      "Masih cupu",
-      "Maaf, belum bang/kak",
-      "Kamu siapa ya?"
-    ],
-    "jawaban":[
-      3,4,2,5,1
-    ],
-    "option_image":false,
-    "pembahasan":"Tidak Ada"
-  },
-  {
-    "tryout_num":"8",
-    "question_image":"",
-    "subCategory_id":"18",
-    "category":"TKP",
-    "question":"Jika ada teman yang sakit, seharusnya kamu?",
-    "option":[
-      "Rusuhin",
-      "Minta makan",
-      "Menjenguk",
-      "Gak peduli",
-      "Pura-pura gak tau"
-    ],
-    "jawaban":[
-      1,2,5,4,3
-    ],
-    "option_image":false,
-    "pembahasan":"Tidak Ada"
-  },
-  {
-    "tryout_num":"9",
-    "question_image":"",
-    "subCategory_id":"20",
-    "category":"TKP",
-    "question":"Sebagai abang yang baik, jika anda melihat adik kalian yang kesusahan, yang harus anda lakukan adalah?",
-    "option":[
-      "Mencari kegiatan lain",
-      "Mengajak bermain game",
-      "Melihat saja",
-      "Menghiraukannya",
-      "Membantunya"
-    ],
-    "jawaban":[
-      3,1,2,4,5
-    ],
-    "option_image":false,
-    "pembahasan":"Tidak Ada"
-  }
+    "tryout_num": 11,
+    "subCategory_id": 20,
+    "category": 3,
+    "question": "Saya sangat senang dengan atasan yang...",
+    "option": "['Dekat dengan anak buah', 'Disiplin dan mempunyai etos kerja\ntinggi', 'Bertanggung jawab', 'Mau mendengar masukan dari\nbawahan', 'Memberi tahu hal-hal yang harus\ndikerjakan']",
+    "option_image": 0,
+    "pembahasan": "Urutan jawaban sesuai skala kepentingan dari segi penilaian antiradikalisme adalah:  A(1), B(3), C(5), D(2), E(4)",
+    "jawaban_tkp": "[1,3,5,2,4]"
+   },
+   {
+    "tryout_num": 12,
+    "subCategory_id": 20,
+    "category": 3,
+    "question": "Bagaimana Anda akan menangani teman yang terus menyebarkan propaganda HTI di media sosial?",
+    "option": "['Membuat postingan tandingan di media sosial saya seputar bahayanya konsep yang ditawarkan HTI karena mengancam persatuan dan menyindir teman saya agar dia sadar', 'Memblocknya di media sosial agar tidak terpengaruh propaganda tentang HTI', 'Tidak tergesa-gesa merespon dan mengamati lebih lanjut, jika masih dilakukan secara konsisten baru saya tegur dan saya ajak berdiskusi kontra HTI secara bil hikmah', 'Menegurnya secara langsung dan menyisipkan pemahaman kontra-HTI secara bil hikmah saat berdiskusi', 'Meninggalkan komentar di postingan teman saya berupa narasi kontra-HTI secara bil hikmah']",
+    "option_image": 0,
+    "pembahasan": "Urutan jawaban sesuai skala kepentingan dari segi penilaian antiradikalisme adalah:  A(3), B(2), C(1), D(5), E(4)",
+    "jawaban_tkp": "[3,2,1,5,4]"
+   },
+   {
+    "tryout_num": 13,
+    "subCategory_id": 20,
+    "category": 3,
+    "question": "Sebagai seorang ASN, tindakan apa yang akan Anda ambil setelah mendengar pernyataan Presiden tentang radikalisme digital?",
+    "option": "['Tetap aktif di media sosial dan membentengi diri agar terhindar dari paham radikalisme', 'Lebih mawas diri dan turut membantu mengedukasi masyarakat untuk mewaspadai radikalisme beerbasis digital dan mengisi ruang digital dengan konten yang positif', 'Menghindari media sosial karena takut terpapar paham radikalisme', 'Fokus menjalankan tanggung jawab pekerjaan dan mendukung upaya pemerintah melawan radikalisme', 'Menggelar diskusi dengan teman sesama ASN agar bisa deteksi dini jika ada teman yang terpapar radikalisme']",
+    "option_image": 0,
+    "pembahasan": "Urutan jawaban sesuai skala kepentingan dari segi penilaian antiradikalisme adalah:  A(4), B(5), C(1), D(3), E(2)",
+    "jawaban_tkp": "[4,5,1,3,2]"
+   }, {
+    "tryout_num": 14,
+    "subCategory_id": 20,
+    "category": 3,
+    "question": "Bagaimana sikap Anda ketika terlibat dalam diskusi di grup WhatsApp yang akhirnya berujung pada ujaran kebencian terhadap suatu etnis?",
+    "option": "['Tidak ikut-ikutan karena belum mengetahui kebenaran informasi dan hanya menjadi “silent reader\" di grup WhatsApp tersebut', 'Langsung keluar dari grup WhatsApp karena konten yang dibahas tidak sesuai dengan marwah Pancasila', 'Tidak langsung percaya pada informasi yang di share oleh anggota grup dan mencari tahu kebenaran info yang di share di grup WhatsApp di channel berita yang terpercaya', 'Mencoba menguji kebenaran informasi yang dibagikan dan berusaha melakukan \"cooling down\" agar pembahasan di grup tidak semakin memanas', 'Menguji kebenaran informasi yang dibagikan dan mengingatkan anggota grup untuk tidak tergesa-gesa dalam mempercayai informasi yang beredar dan menguji kebenaran informasi terlebih dahulu, serta tidak melakukan respon yang mengarah pada ujaran kebencian']",
+    "option_image": 0,
+    "pembahasan": "Urutan jawaban sesuai skala kepentingan dari segi penilaian antiradikalisme adalah:  A(2), B(1), C(3), D(4), E(5)",
+    "jawaban_tkp": "[2,1,3,4,5]"
+   },
+   {
+    "tryout_num": 15,
+    "subCategory_id": 20,
+    "category": 3,
+    "question": "Sebutkan langkah-langkah preventif yang akan Anda ambil dalam memerangi radikalisme di tempat kerja.",
+    "option": "['Mengajak ASN untuk waspada terhadap provokasi dan hasutan', 'Mengedukasi ASN untuk menjalankan aktivitas keagamaan dengan toleran ', 'Melakukan upaya deradikalisasi terhadap ASN yang terpapar paham radikalisme', 'Mengadakan workshop atau seminar pencegahan propaganda radikal', 'Mengadakan seminar kebangsaan dan penanaman nilai Pancasila diberikan kewenangan']",
+    "option_image": 0,
+    "pembahasan": "Urutan jawaban sesuai skala kepentingan dari segi penilaian antiradikalisme adalah:  A(1), B(3), C(5), D(2), E(4)",
+    "jawaban_tkp": "[1,3,5,2,4]"
+   }
 ]

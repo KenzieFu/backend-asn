@@ -24,7 +24,7 @@ exports.freeTO = async(req,res,next)=>{
         (SELECT 
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
-          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.tryout_status='PAID' LIMIT 1) as accessed
+          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.userTryout_status='PAID' LIMIT 1) as accessed
       FROM tryout t 
       WHERE t.tryout_type = 'FREE'
        GROUP BY t.tryout_id  
@@ -54,7 +54,7 @@ exports.paidTO = async(req,res,next)=>{
         (SELECT 
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
-          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.tryout_status='PAID'  LIMIT 1) as accessed
+          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.userTryout_status='PAID'  LIMIT 1) as accessed
       FROM tryout t 
       WHERE t.tryout_type = 'PAY'
        GROUP BY t.tryout_id  
@@ -85,7 +85,7 @@ exports.finishedTryout  = async(req,res,next)=>{
         (SELECT 
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
-          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.tryout_status='PAID'  LIMIT 1) as accessed
+          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.userTryout_status='PAID'  LIMIT 1) as accessed
       FROM tryout t 
        GROUP BY t.tryout_id  
       HAVING isCleared != 0 ORDER BY t.createdAt DESC ;`,
@@ -116,7 +116,7 @@ exports.boughtTryout = async(req,res,next)=>{
         (SELECT 
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
-          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.tryout_status='PAID'  LIMIT 1) as accessed
+          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.userTryout_status='PAID'  LIMIT 1) as accessed
       FROM tryout t  GROUP BY t.tryout_id  
       HAVING isCleared != 0 ORDER BY t.createdAt DESC ;`,
       {
@@ -162,7 +162,7 @@ exports.getTryouts = async (req,res,next)=>{
         (SELECT 
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
-          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.tryout_status='PAID'  LIMIT 1) as accessed
+          WHERE ut.account_id=${account_id} AND ut.tryout_id=t.tryout_id AND ut.userTryout_status='PAID'  LIMIT 1) as accessed
       FROM tryout t ORDER BY t.createdAt DESC ;`,
       {
       
@@ -192,7 +192,7 @@ exports.getTryout = async(req,res,next)=>{
         (SELECT 
           COUNT(ut.userTryout_id) 
           FROM usertryout ut
-          WHERE ut.account_id=${account_id} AND ut.tryout_id=${tryout_id} AND ut.tryout_status='PAID'  LIMIT 1) as accessed
+          WHERE ut.account_id=${account_id} AND ut.tryout_id=${tryout_id} AND ut.userTryout_status='PAID'  LIMIT 1) as accessed
       FROM tryout t WHERE t.tryout_id=${tryout_id} ;`,
       {
         type: QueryTypes.SELECT,
