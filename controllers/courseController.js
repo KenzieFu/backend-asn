@@ -6,36 +6,37 @@ const fs = require("fs");
 const { urlLapis, bucketName } = require("../static");
 
 
-exports.getCourses = async (req,res,next)=>{
-  const {category_id,account_id} = req.params;
-  try{
+exports.getCourses = async (req, res, next) => {
+  const { category_id, account_id } = req.params;
+  try {
     const courses = await sequelize.query(
       `SELECT 
-      c.*,
-      (SELECT 
-        COUNT(cc.clearedCourse_id) 
-        FROM clearedcourse cc 
-        WHERE cc.account_id=${account_id}) as isCleared 
-      FROM course c 
-      WHERE category_id =${category_id} ;`,
+        c.*,
+        (SELECT 
+          COUNT(cc.clearedCourse_id) 
+          FROM clearedcourse cc 
+          WHERE cc.account_id = ${account_id} AND cc.course_id = c.course_id) as isCleared 
+        FROM course c 
+        WHERE category_id = ${category_id};`,
       {
         type: QueryTypes.SELECT,
       }
     );
-    const filtered = courses.map((course)=>{
+    const filtered = courses.map((course) => {
       return {
         ...course,
-        course_image:`${urlLapis}/${bucketName}/${course.course_image}`
+        course_image: `${urlLapis}/${bucketName}/${course.course_image}`
       }
-    })
-    
+    });
+
     res.status(200).json({
-      data:filtered
-    })
-  }catch(err){
+      data: filtered
+    });
+  } catch (err) {
     next(err);
   }
 }
+
 
 //Menampilkan sebuah Course
 exports.getCourse = async ( req,res,next)=>{
