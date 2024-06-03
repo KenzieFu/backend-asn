@@ -237,12 +237,36 @@ exports.getQuiz = async(req,res,next)=>{
       ...twk,
       ...tkp
     ]
+    const dataformated = finalQuiz.map(da=>{
+       // 1. Remove single quotes and square brackets
+  const cleanedString = da.option.substring(1, da.option.length - 1); 
+  // Now: "x', 'x', 'x', 'x', 'x"
+
+  // 2. Split the string by comma and trim whitespace
+  const optionArray = cleanedString.replace(/'/g, '').split(',').map(item => item.trim()); 
+      if(da.category ==3){
+        return{
+          ...da,
+          option:optionArray,
+          jawaban_tkp:JSON.parse(da.jawaban_tkp)
+        }
+      }
+        else{
+          return{
+            ...da,
+            option:optionArray,
+  
+          }
+        }
+      
+     
+    })
   const newTo={
     tryout_id:tryout.tryout_id,
     tryout_title:tryout.tryout_title,
     tryout_duration:tryout.tryout_duration,
     tryout_total:tryout.tryout_total,
-    tryout_content:finalQuiz
+    tryout_content:dataformated
   }
     
     if(isFiles && finalQuiz)
