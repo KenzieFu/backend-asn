@@ -224,9 +224,9 @@ exports.getQuiz = async(req,res,next)=>{
     const datafile = await filejson.json()
     
 
-    const twk = datafile.filter((data)=>data.category ==="TWK");
-    const tiu = datafile.filter((data)=>data.category ==="TIU");
-    const tkp = datafile.filter((data)=>data.category ==="TKP");
+    const twk = datafile.filter((data)=>data.category ==1);
+    const tiu = datafile.filter((data)=>data.category ==2);
+    const tkp = datafile.filter((data)=>data.category ==3);
 
     // const randomTIU =_.shuffle(tiu);
     // const randomTWK =_.shuffle(twk);

@@ -169,7 +169,7 @@ exports.updateAccount = async ( req,res,next) =>{
 
    try{
     let uploadAv ;
-    if(file.originalname){
+    if(file){
       uploadAv = await uploadFILE(file,"profile");
       if(uploadAv ===""){
         const error = new Error("Failed");
