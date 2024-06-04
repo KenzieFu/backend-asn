@@ -3,6 +3,7 @@ const TryoutToken = require("../models/tryoutToken");
 const nano = require("nanoid");
 const UserTryout = require("../models/userTryout");
 const sequelize = require("../database/database");
+const Notifikasi = require("../models/notifikasi");
 
 
 
@@ -70,6 +71,13 @@ exports.redeemToken = async(req,res,next)=>{
         transaction:t
       })
     )
+
+    const notifmsg = {
+      account_id:account_id,
+      notifikasi_msg:`Anda Berhasil Meredeem Token ${tryoutToken_code}`
+    }
+
+    const createNotif = await Notifikasi.create(notifmsg,{transaction:t})
     await t.commit()
     res.status(200).json({
       message:"Berhasil Meredeem token"

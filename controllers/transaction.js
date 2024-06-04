@@ -3,7 +3,8 @@ const UserTransaction = require("../models/transaction");
 const Tryout = require("../models/tryout");
 const UserTryout = require("../models/userTryout");
 const sequelize = require("../database/database");
-const Account = require("../models/account")
+const Account = require("../models/account");
+const Notifikasi = require("../models/notifikasi");
 
 exports.buyTryout = async (req,res,next)=>{
   const {account_id} = req.params;
@@ -79,6 +80,12 @@ exports.buyTryout = async (req,res,next)=>{
         transaction:t
       }
     )
+    const notif = {
+      account_id:account_id,
+      notifkasi_msg:`Transaksi anda untuk \"${transaction_title}\" sedang diproses`
+    }
+
+    const createNotif = await Notifikasi.create(notif,{transaction:t})
     return res.status(200).json({
       message:"Berhasil Membuaat Pesanan"
     });
@@ -133,6 +140,13 @@ exports.updateTransaksi = async(req,res,next)=>{
        transaction:t
       
       })
+
+      const notif = {
+        account_id:account_id,
+        notifkasi_msg:`Transaksi anda untuk \"${transaction_title}\" Gagal`
+      }
+  
+      const createNotif = await Notifikasi.create(notif,{transaction:t})
     
     }
     else if(transaction_status == "SUKSES"){
@@ -144,6 +158,12 @@ exports.updateTransaksi = async(req,res,next)=>{
           }
         }
       })
+      const notif = {
+        account_id:account_id,
+        notifkasi_msg:`Transaksi anda untuk \"${transaction_title}\" Berhasil`
+      }
+  
+      const createNotif = await Notifikasi.create(notif,{transaction:t})
     }
     await t.commit();
     return res.status(200).json({

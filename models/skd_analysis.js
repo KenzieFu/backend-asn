@@ -6,11 +6,7 @@ const table = {
   tableName:"skd_analysis",
   timestamps:true,
 }
-skd_analysis = [
-  {subCategory_id:1,subcategory_score:25},
-  {subCategory_id:2,subcategory_score:15}
-]
- 
+
 
 const SKDAnalysis = sequelize.define("skd_analysis",{
   skdAnalysis_id:{

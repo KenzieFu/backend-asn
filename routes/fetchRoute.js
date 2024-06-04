@@ -7,7 +7,7 @@ const courseController = require("../controllers/courseController");
 const tryoutController = require("../controllers/tryoutController");
 const tryoutBundleController = require("../controllers/tryoutBundleController")
 const transController = require("../controllers/transaction")
-
+const notifController =require("../controllers/notifikasiController")
 //Account
 // get all accounts
 router.get("/accounts",accountController.getAccounts);
@@ -77,5 +77,9 @@ router.get("/tryoutbundles/account/:account_id/detail/:tryoutBundle_id",tryoutBu
 // req.params account_id 
 // body none
 router.get("/transaction/history/:account_id",transController.historyTransaksi);
+
+
+//ambil notifikasi user
+router.get("/notifikasi/:account_id",notifController.fetchNotif);
 
 module.exports=router

@@ -34,6 +34,7 @@ const whitelist = [
 ]
 const { updateAvatar } = require("./controllers/accountController");
 const UserTransaction = require("./models/transaction");
+const Notifikasi = require("./models/notifikasi");
 
 
 const app = express();
@@ -157,6 +158,7 @@ SKDAnalysis.belongsTo(Tryout,{foreignKey:"tryout_id"});
 //tryoutBundle and Tryout
 TryoutBundle.belongsToMany(Tryout,{through:"tryoutBundle_tryout"});
 // UserTransaction.sync({force:true})
+// Notifikasi.sync({force:true})
 
       console.log("backend-asn listen to 8080");
     });
