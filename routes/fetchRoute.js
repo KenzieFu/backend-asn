@@ -48,6 +48,9 @@ router.get("/tryouts/:tryout_id/account/:account_id",tryoutController.getTryout)
 //get startTryout
 router.get("/tryouts/:tryout_id/start",tryoutController.getQuiz);
 
+//tryout pembahasan
+router.get("/tryouts/:tryout_id/pembahasan",tryoutController.getQuiz);
+
 //get finished Tryout
 router.get("/tryouts/finished/:account_id",tryoutController.finishedTryout);
 
