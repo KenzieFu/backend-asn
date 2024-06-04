@@ -6,9 +6,12 @@ const TryoutScore = require("../models/tryoutScore");
 const Tryout = require("../models/tryout");
 const { Op } = require("@sequelize/core");
 const passed = 311
+const tkpPassed = 156;
+const tiuPassed=80
+const twkPassed=65
 //Ketika user sudah menyelesaikan tryout
 exports.tryoutFinished = async (req, res, next) => {
-  const t = await sequelize.transaction();
+  const t = await sequelize.startUnmanagedTransaction();
   const { account_id, tryout_id } = req.params;
 
   const {

@@ -1,6 +1,7 @@
 const { where } = require("@sequelize/core");
 const Account = require("../models/account");
 const Course = require("../models/course");
+const ClearedCourse = require("../models/clearedCourse");
 
 exports.finishedCourse=  async(req,res,next)=>{
   const {account_id,course_id} = req.params;
@@ -28,8 +29,12 @@ exports.finishedCourse=  async(req,res,next)=>{
       error.message="Course tidak ditemukan"
       return next(error)
     }
-
-    res.status(200).json({
+    const cleared = await ClearedCourse.create({
+      account_id:account_id,
+      course_id:course_id
+    })
+    
+    return res.status(200).json({
       message:"Berhasil Menyelesaikan sebuah Course"
     })
   }catch(err){

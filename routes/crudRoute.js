@@ -75,6 +75,7 @@ router.put("/tryouts/:tryout_id",tryoutController.changeTryout)
 
 //Tryout Score
 //cleared a tryout
+
 router.post("/tryouts/cleared/:tryout_id/:account_id",tryoutScoreController.tryoutFinished);
 
 //Random Token 
