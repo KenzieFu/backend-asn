@@ -60,7 +60,7 @@ exports.getCourse = async ( req,res,next)=>{
       (SELECT 
         COUNT(cc.clearedCourse_id) 
         FROM clearedcourse cc 
-        WHERE cc.account_id=${account_id}) as isCleared 
+        WHERE cc.account_id=${account_id} AND cc.course_id = ${course_id}) as isCleared 
       FROM course c 
       WHERE c.course_id = ${course_id} LIMIT 1  ;`,
       {
