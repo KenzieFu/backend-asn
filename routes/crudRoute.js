@@ -9,8 +9,9 @@ const tryoutController = require("../controllers/tryoutController");
 const generateRandomToken = require("../controllers/generateRandomToken");
 const { registerValidator } = require("../validator/rules");
 const bundleController = require("../controllers/tryoutBundleController");
-const transController = require("../controllers/transaction")
-const tryoutScoreController =require("../controllers/tryoutScoreController")
+const transController = require("../controllers/transaction");
+const tryoutScoreController =require("../controllers/tryoutScoreController");
+const notifikasiController = require("../controllers/notifikasiController");
 // ACCOUNT
 //create account
 router.post("/accounts",registerValidator,accountController.createAccount);
@@ -86,7 +87,10 @@ router.post("/redeem/:account_id",generateRandomToken.redeemToken);
 
 
 //create bundle
-router.post("/bundle",bundleController.createTryoutBundle)
+router.post("/bundle",bundleController.createTryoutBundle);
+
+//create notifikasi
+router.post("/notification/:account_id", notifikasiController.createNotif);
 
 
 // admin update status Transaksi

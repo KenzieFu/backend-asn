@@ -72,6 +72,8 @@ app.use((error, req, res, next) => {
 // WebSocket server
 const wss = new WebSocket.Server({ port: 8081 });
 
+app.set('wss', wss);
+
 wss.on("connection", (ws) => {
   console.log("WebSocket connected");
 
@@ -84,6 +86,7 @@ wss.on("connection", (ws) => {
   ws.on("close", () => {
     console.log("WebSocket connection closed");
   });
+
 });
 
 // Additional routes
