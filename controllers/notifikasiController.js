@@ -33,17 +33,17 @@ exports.createNotif = async (req, res, next) => {
     const createNotifikasi = await Notifikasi.create({ account_id, notifikasi_msg });
 
     if (createNotifikasi) {
-      const wss = req.app.get('wss'); // Get the WebSocket server instance from the app
+      const wss = req.app.get('wss');
 
       wss.clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify(createNotifikasi)); // Send the newly created notification data
+          client.send(JSON.stringify(createNotifikasi));
         }
       });
 
       res.status(200).json({
         message: "Berhasil Menambahkan notifikasi",
-        notification: createNotifikasi // Optionally send the created notification data in the response
+        notification: createNotifikasi
       });
     } else {
       res.status(500).json({
