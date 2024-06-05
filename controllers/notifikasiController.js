@@ -42,7 +42,7 @@ exports.createNotif = async (req, res, next) => {
       });
 
       res.status(200).json({
-        message: "Berhasil Menambahkan sub kategori",
+        message: "Berhasil Menambahkan notifikasi",
         notification: createNotifikasi // Optionally send the created notification data in the response
       });
     } else {
