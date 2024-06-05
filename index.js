@@ -78,8 +78,6 @@ wss.on("connection", (ws) => {
   ws.on("message", (message) => {
     console.log(`Received message: ${message}`);
 
-    // Here you can handle the incoming WebSocket messages
-    // For example, you can send a response back to the client
     ws.send("Message received by WebSocket server");
   });
 
