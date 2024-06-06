@@ -101,6 +101,7 @@ exports.buyTryout = async (req, res, next) => {
       notifkasi_msg: `Transaksi anda untuk \"${transaction_title}\" sedang diproses`,
     };
 
+
     const createNotifikasi = await Notifikasi.create(notif);
     if (createNotifikasi) {
       const wss = req.app.get('wss');
@@ -109,16 +110,18 @@ exports.buyTryout = async (req, res, next) => {
         if (client.readyState === WebSocket.OPEN) {
           client.send(JSON.stringify(createNotifikasi));
         }
+        res.status(201).json({
+          message: "Berhasil Menambahkan notifikasi",
+          notification: createNotifikasi
+        });
       });
-    } else {
-     console.log("Gagal Membuat Notifikasi")
     }
     return res.status(200).json({
       message: "Berhasil Membuaat Pesanan",
     });
   } catch (err) {
     await t.rollback()
-    next(err);
+    return next(err);
   }
 };
 
@@ -159,25 +162,7 @@ exports.updateTransaksi = async (req, res, next) => {
       }
     );
     if (transaction_status == "GAGAL") {
-      const notif = {
-        account_id: account_id,
-        notifkasi_msg: `Transaksi anda untuk \"${transaction_title}\" Gagal`,
-      };
-
-      const createNotifikasi = await Notifikasi.create(notif, { transaction: t });
-
-      if (createNotifikasi) {
-        const wss = req.app.get('wss');
-  
-        wss.clients.forEach(client => {
-          if (client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify(createNotifikasi));
-          }
-        });
-      } else {
-       console.log("Gagal Membuat Notifikasi")
-      }
-
+    
       
       const destroyTryout = await UserTryout.destroy({
         where: {
@@ -189,12 +174,30 @@ exports.updateTransaksi = async (req, res, next) => {
         transaction: t,
       });
 
-      // const notif = {
-      //   account_id: account_id,
-      //   notifkasi_msg: `Transaksi anda untuk \"${transaction_title}\" Gagal`,
-      // };
+      const notif = {
+        account_id: findTransaction.account_id,
+        notifkasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Gagal`,
+      };
 
-      // const createNotif = await Notifikasi.create(notif, { transaction: t });
+      const createNotifikasi = await Notifikasi.create(notif);
+
+      if (createNotifikasi) {
+        const wss = req.app.get('wss');
+  
+        wss.clients.forEach(client => {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify(createNotifikasi));
+          }
+        });
+        res.status(201).json({
+          message: "Berhasil Menambahkan notifikasi",
+          notification: createNotifikasi
+        });
+      } else {
+        res.status(500).json({
+          message: "Gagal membuat notifikasi"
+        });
+      }
     } else if (transaction_status == "SUKSES") {
       const update = await UserTryout.update(
         { transaction_status: transaction_status },
@@ -207,12 +210,30 @@ exports.updateTransaksi = async (req, res, next) => {
           },
         }
       );
-      // const notif = {
-      //   account_id: account_id,
-      //   notifkasi_msg: `Transaksi anda untuk \"${transaction_title}\" Berhasil`,
-      // };
+      const notif = {
+        account_id: findTransaction.account_id,
+        notifkasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Gagal`,
+      };
 
-      // const createNotif = await Notifikasi.create(notif, { transaction: t });
+      const createNotifikasi = await Notifikasi.create(notif);
+
+      if (createNotifikasi) {
+        const wss = req.app.get('wss');
+  
+        wss.clients.forEach(client => {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify(createNotifikasi));
+          }
+        });
+        res.status(201).json({
+          message: "Berhasil Menambahkan notifikasi",
+          notification: createNotifikasi
+        });
+      } else {
+        res.status(500).json({
+          message: "Gagal membuat notifikasi"
+        });
+      }
     }
     await t.commit();
     return res.status(200).json({
@@ -245,11 +266,11 @@ exports.historyTransaksi = async (req, res, next) => {
       return {
         ...his,
         bukti_transaksi:`${urlLapis}/${bucketName}/${his.bukti_transaksi}`,
-        listTryout: ltryout,
+        listTryout: ltryout.split(','),
       };
     });
     return res.status(200).json({
-      data: history,
+      data: mapes,
     });
   } catch (err) {
     next(err);
