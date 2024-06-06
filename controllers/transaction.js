@@ -258,9 +258,16 @@ exports.historyTransaksi = async (req, res, next) => {
     });
 
     const mapes = history.map((his) => {
-      const ltryout = his.listTryout.replaceAll("").split(",");
+      const ltryout = his.listTryout.split(",");
       return {
-        ...his,
+        transactionRecord_id:his.transactionRecord_id,
+        account_id:his.account_id,
+        transaction_title:his.transaction_title,
+        jumlah_to:his.jumlah_to,
+        transaction_status:his.transaction_status,
+        transaction_price:his.transaction_price,
+        createdAt:his.createdAt,
+        updatedAt:his.updatedAt,
         bukti_transaksi:`${urlLapis}/${bucketName}/${his.bukti_transaksi}`,
         listTryout: ltryout,
       };
