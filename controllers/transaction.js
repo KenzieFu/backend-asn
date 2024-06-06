@@ -21,32 +21,33 @@ exports.buyTryout = async (req, res, next) => {
         tryout_id: { [Op.in]: parsedArray },
       },
     });
-   
+
     const checkOwned = await UserTryout.findAll({
       where: {
-        [Op.and]: 
-          {
-            tryout_id: { [Op.in]: parsedArray },
-            account_id: account_id,
-          },
-        
+        [Op.and]: {
+          tryout_id: { [Op.in]: parsedArray },
+          account_id: account_id,
+        },
       },
     });
-    //check kalau account terdapat dalam database
+
+    // Check if account exists
     if (!checkAccount) {
       const error = new Error("Validation Error");
       error.statusCode = 500;
       error.message = "Akun tidak ditemukan";
       return next(error);
     }
-    /// check kalau tryout  tidak ditemukan
-    if (checkTryout.length != parsedArray.length) {
+
+    // Check if all tryouts exist
+    if (checkTryout.length !== parsedArray.length) {
       const error = new Error("Validation Error");
       error.statusCode = 500;
       error.message = "Salah Satu Tryout Tidak Ditemukan";
       return next(error);
     }
-    console.log(checkOwned)
+
+    // Check if any tryouts are already owned
     if (checkOwned.length) {
       const error = new Error("Validation Error");
       error.statusCode = 500;
@@ -55,14 +56,14 @@ exports.buyTryout = async (req, res, next) => {
       return next(error);
     }
 
-    //Check jika file tidak ditemukan
+    // Check if file is present
     if (!file) {
       const error = new Error("Validation Error");
       error.statusCode = 500;
       error.message = "File Gagal untuk diupload";
       return next(error);
     }
-    
+
     const uploadAv = await uploadFILE(file, "transaction");
     if (uploadAv === "") {
       const error = new Error("Failed");
@@ -96,13 +97,14 @@ exports.buyTryout = async (req, res, next) => {
       }
     );
     await t.commit();
+
     const notif = {
       account_id: account_id,
-      notifkasi_msg: `Transaksi anda untuk \"${transaction_title}\" sedang diproses`,
+      notifikasi_msg: `Transaksi anda untuk \"${transaction_title}\" sedang diproses`,
     };
 
-
     const createNotifikasi = await Notifikasi.create(notif);
+
     if (createNotifikasi) {
       const wss = req.app.get('wss');
 
@@ -110,17 +112,16 @@ exports.buyTryout = async (req, res, next) => {
         if (client.readyState === WebSocket.OPEN) {
           client.send(JSON.stringify(createNotifikasi));
         }
-        res.status(201).json({
-          message: "Berhasil Menambahkan notifikasi",
-          notification: createNotifikasi
-        });
       });
     }
-    return res.status(200).json({
-      message: "Berhasil Membuaat Pesanan",
+
+    return res.status(201).json({
+      message: "Berhasil Membuat Pesanan",
     });
   } catch (err) {
-    await t.rollback()
+    if (!t.finished) {
+      await t.rollback();
+    }
     return next(err);
   }
 };
@@ -176,7 +177,7 @@ exports.updateTransaksi = async (req, res, next) => {
 
       const notif = {
         account_id: findTransaction.account_id,
-        notifkasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Gagal`,
+        notifikasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Gagal`,
       };
 
       const createNotifikasi = await Notifikasi.create(notif);
@@ -208,7 +209,7 @@ exports.updateTransaksi = async (req, res, next) => {
       );
       const notif = {
         account_id: findTransaction.account_id,
-        notifkasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Gagal`,
+        notifikasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Gagal`,
       };
 
       const createNotifikasi = await Notifikasi.create(notif);
