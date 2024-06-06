@@ -70,7 +70,7 @@ exports.deleteAccount = async (req,res,next)=>{
     
     const account = await Accounts.destroy({
       where:{
-        account_id:accountId
+        account_id:account_id
       }
     })
    res.status(200).json({
@@ -162,6 +162,7 @@ exports.updateAccount = async ( req,res,next) =>{
   const file = req.file;
   const {
     name,
+    username,
     email,
     password
    } = req.body
@@ -180,9 +181,9 @@ exports.updateAccount = async ( req,res,next) =>{
     }
 
    
-   const data =!file? {
-    name,email,password,
-   }:{name,email,password,avatar:uploadAv}
+   const data =!uploadAv? {
+    name,username,email,password,
+   }:{name,username,email,password,avatar:uploadAv}
 
    const updateAcc = await Accounts.update(data,{
     where:{
