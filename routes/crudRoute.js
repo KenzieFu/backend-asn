@@ -20,8 +20,6 @@ router.post("/accounts",registerValidator,accountController.createAccount);
 //delete account
 router.delete("/accounts/:account_id",accountController.deleteAccount);
 
-//update account
-router.put("/accounts/:account_id",accountController.updateAccount);
 
 // Category
 // create category

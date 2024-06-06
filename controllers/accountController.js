@@ -162,7 +162,6 @@ exports.updateAccount = async ( req,res,next) =>{
   const file = req.file;
   const {
     name,
-    username,
     email,
     password
    } = req.body
@@ -181,9 +180,9 @@ exports.updateAccount = async ( req,res,next) =>{
     }
 
    
-   const data =!uploadAv? {
-    name,username,email,password,
-   }:{name,username,email,password,avatar:uploadAv}
+   const data =file? {
+    name,email,password,
+   }:{name,email,password,avatar:uploadAv}
 
    const updateAcc = await Accounts.update(data,{
     where:{
