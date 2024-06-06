@@ -193,11 +193,7 @@ exports.updateTransaksi = async (req, res, next) => {
           message: "Berhasil Menambahkan notifikasi",
           notification: createNotifikasi
         });
-      } else {
-        res.status(500).json({
-          message: "Gagal membuat notifikasi"
-        });
-      }
+      } 
     } else if (transaction_status == "SUKSES") {
       const update = await UserTryout.update(
         { transaction_status: transaction_status },
@@ -266,7 +262,7 @@ exports.historyTransaksi = async (req, res, next) => {
       return {
         ...his,
         bukti_transaksi:`${urlLapis}/${bucketName}/${his.bukti_transaksi}`,
-        listTryout: ltryout.split(','),
+        listTryout: ltryout,
       };
     });
     return res.status(200).json({
