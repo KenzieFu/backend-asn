@@ -149,53 +149,53 @@ exports.updateAvatar = async(req,res,next)=>{
 }
 
 // Mengupdate akun
-exports.updateAccount = async ( req,res,next) =>{
-   const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        const error = new Error("Validation Error");
-        error.statusCode = 500
+exports.updateAccount = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error("Validation Error");
+    error.statusCode = 500;
+    error.message = errors.array()[0].msg;
+    return next(error);
+  }
 
-        error.message=errors.array()[0].msg;
-        return next(error); 
-    }
-  const {account_id} = req.params;
+  const { account_id } = req.params;
   const file = req.file;
-  const {
-    name,
-    username,
-    email,
-    password
-   } = req.body
+  const { name, email, password } = req.body;
 
-   try{
-    let uploadAv ;
-    console.log(file)
-    if(file){
-      uploadAv = await uploadFILE(file,"profile");
-      if(uploadAv ===""){
+  try {
+    let uploadAv;
+    console.log(file);
+    if (file) {
+      uploadAv = await uploadFILE(file, "profile");
+      if (uploadAv === "") {
         const error = new Error("Failed");
         error.statusCode = 500;
-        error.message="File gagal untuk diupload"
+        error.message = "File gagal untuk diupload";
         return next(error);
       }
     }
 
-   
-   const data =!uploadAv? {
-    name,username,email,password,
-   }:{name,username,email,password,avatar:uploadAv}
+    const data = !uploadAv
+      ? { name, email }
+      : { name, email, avatar: uploadAv };
 
-   const updateAcc = await Accounts.update(data,{
-    where:{
-      account_id:account_id
+    if (password !== null && password.trim() !== "") {
+      const hashed = await bcryptjs.hash(password,12);
+      data.password = hashed;
     }
-   });
 
-   res.status(200).json({
-    message:"Berhasil mengubah akun"
-   })
-  }catch(err){
-    next(err)
+    const updateAcc = await Accounts.update(data, {
+      where: {
+        account_id: account_id,
+      },
+    });
+
+    res.status(200).json({
+      message: "Berhasil mengubah akun",
+    });
+  } catch (err) {
+    next(err);
   }
-}
+};
+
 
