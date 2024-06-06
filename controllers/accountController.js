@@ -180,7 +180,7 @@ exports.updateAccount = async ( req,res,next) =>{
     }
 
    
-   const data =file? {
+   const data =!file? {
     name,email,password,
    }:{name,email,password,avatar:uploadAv}
 
