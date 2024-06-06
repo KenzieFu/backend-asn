@@ -146,7 +146,7 @@ exports.updateTransaksi = async (req, res, next) => {
     if (findTransaction.transaction_status != "SEDANG DIPROSES") {
       const error = new Error("Validation Error");
       error.statusCode = 404;
-      error.message = "Transaksi Tidak Boleh Di update";
+      error.message = "Transaksi Tidak Boleh Diupdate";
       return next(error);
     }
     const splitTryout = findTransaction.listTryout.split(",");
@@ -154,7 +154,6 @@ exports.updateTransaksi = async (req, res, next) => {
       {
         transaction_status,
       },
-
       {
         where: {
           transactionRecord_id: transactionRecord_id,
@@ -162,9 +161,8 @@ exports.updateTransaksi = async (req, res, next) => {
         transaction: t,
       }
     );
+
     if (transaction_status == "GAGAL") {
-    
-      
       const destroyTryout = await UserTryout.destroy({
         where: {
           [Op.and]: {
@@ -180,24 +178,19 @@ exports.updateTransaksi = async (req, res, next) => {
         notifikasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Gagal`,
       };
 
-      const createNotifikasi = await Notifikasi.create(notif);
+      const createNotifikasi = await Notifikasi.create(notif, { transaction: t });
 
       if (createNotifikasi) {
         const wss = req.app.get('wss');
-  
         wss.clients.forEach(client => {
           if (client.readyState === WebSocket.OPEN) {
             client.send(JSON.stringify(createNotifikasi));
           }
         });
-        res.status(201).json({
-          message: "Berhasil Menambahkan notifikasi",
-          notification: createNotifikasi
-        });
       } 
     } else if (transaction_status == "SUKSES") {
       const update = await UserTryout.update(
-        { transaction_status: transaction_status },
+        { userTryout_status: "PAID" },
         {
           where: {
             [Op.and]: {
@@ -205,45 +198,44 @@ exports.updateTransaksi = async (req, res, next) => {
               account_id: findTransaction.account_id,
             },
           },
+          transaction: t,
         }
       );
+
       const notif = {
         account_id: findTransaction.account_id,
-        notifikasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Gagal`,
+        notifikasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Sukses`,
       };
 
-      const createNotifikasi = await Notifikasi.create(notif);
+      const createNotifikasi = await Notifikasi.create(notif, { transaction: t });
 
       if (createNotifikasi) {
         const wss = req.app.get('wss');
-  
         wss.clients.forEach(client => {
           if (client.readyState === WebSocket.OPEN) {
             client.send(JSON.stringify(createNotifikasi));
           }
         });
-        res.status(201).json({
-          message: "Berhasil Menambahkan notifikasi",
-          notification: createNotifikasi
-        });
       } else {
-        res.status(500).json({
-          message: "Gagal membuat notifikasi"
-        });
+        throw new Error("Gagal membuat notifikasi");
       }
     }
+
     await t.commit();
     return res.status(200).json({
       message: "Berhasil Mengupdate Transaksi",
     });
   } catch (err) {
-    t.rollback();
+    if (!t.finished) {
+      await t.rollback();
+    }
     const error = new Error("An Error Occured");
     error.statusCode = 500;
     error.message = "Terjadi Kesalahan dalam Transaksi";
     return next(error);
   }
 };
+
 
 exports.historyTransaksi = async (req, res, next) => {
   const { account_id } = req.params;
