@@ -17,7 +17,7 @@ const accountController = require("./controllers/accountController");
 // Model imports
 const Account = require("./models/account");
 const Category = require("./models/category");
-const ClearedCourse = require("./models/clearedCourse");
+const ClearedCourse = require("./models/clearedCourse"); 
 const Course = require("./models/course");
 const SKDAnalysis = require("./models/skd_analysis");
 const SubCategory = require("./models/subCategory");

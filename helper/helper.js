@@ -7,7 +7,7 @@ const { nanoid } = require("nanoid");
 
 
 
-exports.uploadFILE = (file,path) => new Promise(async (resolve, reject) => {
+exports.uploadFILE = (file,parent) => new Promise(async (resolve, reject) => {
 
   const reandom = nanoid()+path.extname(file.originalname);
   const storage = new Storage({ projectId, keyFilename: keyFilename });
@@ -16,7 +16,7 @@ exports.uploadFILE = (file,path) => new Promise(async (resolve, reject) => {
 
   
   const bucket = storage.bucket(bucketName);
-  const blob = bucket.file(`${path}/${reandom}`);
+  const blob = bucket.file(`${parent}/${reandom}`);
  
   console.log(`File upload START: `, new Date());
   blob.save(
@@ -34,7 +34,7 @@ exports.uploadFILE = (file,path) => new Promise(async (resolve, reject) => {
       }
     }
   );
-  resolve(`${path}/${reandom}`);
+  resolve(`${parent}/${reandom}`);
 });
 
 exports.uploadFile = (file, pathName) =>
