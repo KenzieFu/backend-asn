@@ -6,6 +6,7 @@ const sequelize = require("../database/database");
 const Account = require("../models/account");
 const Notifikasi = require("../models/notifikasi");
 const { uploadFILE } = require("../helper/helper");
+const { urlLapis, bucketName } = require("../static");
 
 exports.buyTryout = async (req, res, next) => {
   const { account_id } = req.params;
@@ -95,12 +96,23 @@ exports.buyTryout = async (req, res, next) => {
       }
     );
     await t.commit();
-    // const notif = {
-    //   account_id: account_id,
-    //   notifkasi_msg: `Transaksi anda untuk \"${transaction_title}\" sedang diproses`,
-    // };
+    const notif = {
+      account_id: account_id,
+      notifkasi_msg: `Transaksi anda untuk \"${transaction_title}\" sedang diproses`,
+    };
 
-    // const createNotif = await Notifikasi.create(notif, { transaction: t });
+    const createNotifikasi = await Notifikasi.create(notif);
+    if (createNotifikasi) {
+      const wss = req.app.get('wss');
+
+      wss.clients.forEach(client => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(JSON.stringify(createNotifikasi));
+        }
+      });
+    } else {
+     console.log("Gagal Membuat Notifikasi")
+    }
     return res.status(200).json({
       message: "Berhasil Membuaat Pesanan",
     });
@@ -147,6 +159,26 @@ exports.updateTransaksi = async (req, res, next) => {
       }
     );
     if (transaction_status == "GAGAL") {
+      const notif = {
+        account_id: account_id,
+        notifkasi_msg: `Transaksi anda untuk \"${transaction_title}\" Gagal`,
+      };
+
+      const createNotifikasi = await Notifikasi.create(notif, { transaction: t });
+
+      if (createNotifikasi) {
+        const wss = req.app.get('wss');
+  
+        wss.clients.forEach(client => {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify(createNotifikasi));
+          }
+        });
+      } else {
+       console.log("Gagal Membuat Notifikasi")
+      }
+
+      
       const destroyTryout = await UserTryout.destroy({
         where: {
           [Op.and]: {
@@ -212,6 +244,7 @@ exports.historyTransaksi = async (req, res, next) => {
       const ltryout = his.listTryout.replaceAll("").split(",");
       return {
         ...his,
+        bukti_transaksi:`${urlLapis}/${bucketName}/${his.bukti_transaksi}`,
         listTryout: ltryout,
       };
     });

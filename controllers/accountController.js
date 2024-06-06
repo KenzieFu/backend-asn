@@ -169,6 +169,7 @@ exports.updateAccount = async ( req,res,next) =>{
 
    try{
     let uploadAv ;
+    console.log(file)
     if(file){
       uploadAv = await uploadFILE(file,"profile");
       if(uploadAv ===""){
