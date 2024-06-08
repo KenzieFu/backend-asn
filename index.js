@@ -28,7 +28,7 @@ const TryoutBundle = require("./models/tryout_bundle");
 const UserTryout = require("./models/userTryout");
 const UserTransaction = require("./models/transaction");
 const Notifikasi = require("./models/notifikasi");
-
+const {updateAccValidator} = require("./validator/rules")
 const multer = require("multer");
 const { registerValidator } = require("./validator/rules");
 const whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
@@ -105,8 +105,8 @@ app.put(
 );
 app.put(
   "/accounts/:account_id",
-  registerValidator,
   uploadMulter.single("avatar"),
+  updateAccValidator,
   accountController.updateAccount
 );
 app.post(
@@ -169,7 +169,8 @@ sequelize
       TryoutBundle.belongsToMany(Tryout, { through: "tryoutBundle_tryout" });
       // UserTransaction.sync({force:true})
       // Notifikasi.sync({force:true})
- 
+      // Account.sync({force:true})
+      
       console.log("backend-asn listening on port 8080");
     });
   })
