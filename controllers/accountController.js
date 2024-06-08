@@ -24,6 +24,7 @@ exports.createAccount = async (req,res,next)=>{
       email,
       password,
       name,
+      phone
     } = req.body;
     console.log(email)
     const checkEmail = await Account.count({
@@ -45,7 +46,8 @@ exports.createAccount = async (req,res,next)=>{
       email:email,
       username:username,
       name:name,
-      password:hashed
+      password:hashed,
+      phone
     }
     
 
@@ -160,7 +162,7 @@ exports.updateAccount = async (req, res, next) => {
 
   const { account_id } = req.params;
   const file = req.file;
-  const { name, email, password } = req.body;
+  const { name, email, password,phone } = req.body;
 
   try {
     let uploadAv;
@@ -175,9 +177,9 @@ exports.updateAccount = async (req, res, next) => {
       }
     }
 
-    const data = !uploadAv
-      ? { name, email }
-      : { name, email, avatar: uploadAv };
+    const data = !file
+      ? { name, email,phone }
+      : { name, email, avatar: uploadAv,phone };
 
     if (password !== null && password.trim() !== "") {
       const hashed = await bcryptjs.hash(password,12);
