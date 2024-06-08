@@ -1,6 +1,6 @@
 const Sequelize = require("@sequelize/core");
 
-const sequelize = new Sequelize("backend-asn","root","",{
+const sequelize = new Sequelize("backend-asn","root","",{timezone:"+07:00"},{
   host:"localhost",
   port:3306,
   dialect:"mysql",
