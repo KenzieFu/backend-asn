@@ -98,4 +98,7 @@ router.post("/notification/:account_id", notifikasiController.createNotif);
 router.put("/updateTransaction/:transactionRecord_id",transController.updateTransaksi);
 
 
+//Notifikasi
+router.put("/updateNotif/:account_id/:notifikasi_id",notifikasiController.clickedNotif)
+
 module.exports = router;

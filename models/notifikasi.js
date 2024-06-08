@@ -25,6 +25,11 @@ const Notifikasi = sequelize.define("notifikasi",{
     allowNull:false,
     defaultValue:"Unknown",
   },
+  isClicked:{
+    type:DataTypes.BOOLEAN,
+    allowNull:false,
+    defaultValue:false
+  },
   notifikasi_msg :{
     type:DataTypes.STRING, 
     allowNull:false,

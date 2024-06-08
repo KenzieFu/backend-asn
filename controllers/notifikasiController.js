@@ -53,3 +53,24 @@ exports.createNotif = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
+exports.clickedNotif = async (req,res,next)=>{
+  const {account_id,notifikasi_id} =req.params;
+  try{  
+    const findNotif =  await Notifikasi.update({isClicked:true},{
+      where:{
+        [Op.and]:{
+          account_id:account_id,
+          notifikasi_id:notifikasi_id
+        }
+      }
+    })
+    return res.status(200).json({
+      message:"User membaca notif"
+    })
+  }catch(err){
+    next(err);
+  }
+}
