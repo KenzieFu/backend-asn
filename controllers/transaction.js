@@ -100,6 +100,7 @@ exports.buyTryout = async (req, res, next) => {
 
     const notif = {
       account_id: account_id,
+      notifikasi_title:"Transaksi sedang berlangsung",
       notifikasi_msg: `Transaksi anda untuk \"${transaction_title}\" sedang diproses`,
     };
 
@@ -175,6 +176,7 @@ exports.updateTransaksi = async (req, res, next) => {
 
       const notif = {
         account_id: findTransaction.account_id,
+        notifikasi_title:"Transaksi Gagal",
         notifikasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Gagal`,
       };
 
@@ -204,6 +206,7 @@ exports.updateTransaksi = async (req, res, next) => {
 
       const notif = {
         account_id: findTransaction.account_id,
+        notifikasi_title:"Transaksi Sukses",
         notifikasi_msg: `Transaksi anda untuk \"${findTransaction.transaction_title}\" Sukses`,
       };
 

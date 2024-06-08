@@ -74,6 +74,7 @@ exports.redeemToken = async(req,res,next)=>{
 
     const notifmsg = {
       account_id:account_id,
+      notifikasi_title:"Redeem Berhasil",
       notifikasi_msg:`Anda Berhasil Meredeem Token ${tryoutToken_code}`
     }
 

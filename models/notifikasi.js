@@ -20,6 +20,11 @@ const Notifikasi = sequelize.define("notifikasi",{
     allowNull:false,
     onDelete:"cascade"
   },
+  notifikasi_title:{
+    type:DataTypes.STRING(60),
+    allowNull:false,
+    defaultValue:"Unknown",
+  },
   notifikasi_msg :{
     type:DataTypes.STRING, 
     allowNull:false,
