@@ -17,7 +17,7 @@ const accountController = require("./controllers/accountController");
 // Model imports
 const Account = require("./models/account");
 const Category = require("./models/category");
-const ClearedCourse = require("./models/clearedCourse"); 
+const ClearedCourse = require("./models/clearedCourse");
 const Course = require("./models/course");
 const SKDAnalysis = require("./models/skd_analysis");
 const SubCategory = require("./models/subCategory");
@@ -30,7 +30,8 @@ const UserTransaction = require("./models/transaction");
 const Notifikasi = require("./models/notifikasi");
 
 const multer = require("multer");
-const whitelist = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+const { registerValidator } = require("./validator/rules");
+const whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
 const app = express();
 const storage = multer.memoryStorage();
@@ -39,17 +40,20 @@ const uploadMulter = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (!whitelist.includes(file.mimetype)) {
-      return cb(new Error('file is not allowed'));
+      return cb(new Error("file is not allowed"));
     }
     cb(null, true);
-  }
+  },
 });
 
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, PATCH, DELETE");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+  );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
@@ -72,7 +76,7 @@ app.use((error, req, res, next) => {
 // WebSocket server
 const wss = new WebSocket.Server({ port: 8081 });
 
-app.set('wss', wss);
+app.set("wss", wss);
 
 wss.on("connection", (ws) => {
   console.log("WebSocket connected");
@@ -86,20 +90,86 @@ wss.on("connection", (ws) => {
   ws.on("close", () => {
     console.log("WebSocket connection closed");
   });
-
 });
 
 // Additional routes
-app.post("/courses", uploadMulter.single("course_image"), courseController.createCourse);
-app.put("/courses/content/:course_id", uploadMulter.single("course_file"), courseController.assignCourseContent);
-app.put("/accounts/:account_id", uploadMulter.single("avatar"), accountController.updateAccount);
-app.post("/tryouts", uploadMulter.single("tryout_file"), tryoutController.createTryout);
-app.post("/tryouts/transaction/:account_id", uploadMulter.single('bukti_transaksi'), transController.buyTryout);
+app.post(
+  "/courses",
+  uploadMulter.single("course_image"),
+  courseController.createCourse
+);
+app.put(
+  "/courses/content/:course_id",
+  uploadMulter.single("course_file"),
+  courseController.assignCourseContent
+);
+app.put(
+  "/accounts/:account_id",
+  registerValidator,
+  uploadMulter.single("avatar"),
+  accountController.updateAccount
+);
+app.post(
+  "/tryouts",
+  uploadMulter.single("tryout_file"),
+  tryoutController.createTryout
+);
+app.post(
+  "/tryouts/transaction/:account_id",
+  uploadMulter.single("bukti_transaksi"),
+  transController.buyTryout
+);
 
-sequelize.authenticate()
+sequelize
+  .authenticate()
   .then(() => {
     console.log("Connection has established successfully");
+
     app.listen(8080, () => {
+      //Relationship between category and sub category
+      Category.hasMany(SubCategory, { foreignKey: "category_id" });
+      SubCategory.belongsTo(Category, { foreignKey: "category_id" });
+
+      //Relationship between course and subcategory
+      Course.belongsTo(Category, { foreignKey: "category_id" });
+      Category.hasMany(Course, { foreignKey: "category_id" });
+
+      //Relationship Tryout vs TryoutScore
+      Tryout.hasMany(TryoutScore, { foreignKey: "tryout_id" });
+      TryoutScore.belongsTo(Tryout, { foreignKey: "tryout_id" });
+
+      //relationshop TryoutScore vs Account
+      TryoutScore.belongsTo(Account, { foreignKey: "account_id" });
+      Account.hasMany(TryoutScore, { foreignKey: "account_id" });
+
+      //RelationShip Transaction vs Tryout
+      UserTryout.belongsTo(Tryout, { foreignKey: "tryout_id" });
+      Tryout.hasMany(UserTryout, { foreignKey: "tryout_id" });
+
+      //Relationship Transaction vs Account
+      UserTryout.belongsTo(Account, { foreignKey: "account_id" });
+      Account.hasMany(UserTryout, { foreignKey: "account_id" });
+
+      //Relationship CompleteCourse v Account
+      ClearedCourse.belongsTo(Account, { foreignKey: "account_id" });
+      Account.hasMany(ClearedCourse, { foreignKey: "account_id" });
+
+      //Relationship CompleteCourse v Course
+      ClearedCourse.belongsTo(Course, { foreignKey: "course_id" });
+      Course.hasMany(ClearedCourse, { foreignKey: "course_id" });
+
+      //SKD analysis
+      SKDAnalysis.belongsTo(SubCategory, { foreignKey: "subCategory_id" });
+      SubCategory.hasMany(SKDAnalysis, { foreignKey: "subCategory_id" });
+
+      //SKD anlaysis
+      SKDAnalysis.belongsTo(Tryout, { foreignKey: "tryout_id" });
+
+      //tryoutBundle and Tryout
+      TryoutBundle.belongsToMany(Tryout, { through: "tryoutBundle_tryout" });
+      // UserTransaction.sync({force:true})
+      // Notifikasi.sync({force:true})
+ 
       console.log("backend-asn listening on port 8080");
     });
   })

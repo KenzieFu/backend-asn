@@ -13,6 +13,8 @@ exports.registerValidator = [
     }
     return true;
   }),
+  body('phone',"Nomor Handphone tidak boleh kosong").not().isEmpty(),
+  body('phone',"Nomor Handphone tidak valid").matches(/^(0|62)?\d{8,13}$/)
 
   
 ]

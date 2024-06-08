@@ -24,6 +24,7 @@ exports.createAccount = async (req,res,next)=>{
       email,
       password,
       name,
+      phone,
     } = req.body;
     console.log(email)
     const checkEmail = await Account.count({
@@ -45,6 +46,7 @@ exports.createAccount = async (req,res,next)=>{
       email:email,
       username:username,
       name:name,
+      phone,
       password:hashed
     }
     
@@ -163,7 +165,8 @@ exports.updateAccount = async ( req,res,next) =>{
   const {
     name,
     email,
-    password
+    password,
+    phone
    } = req.body
 
    try{
@@ -181,8 +184,8 @@ exports.updateAccount = async ( req,res,next) =>{
 
    
    const data =!file? {
-    name,email,password,
-   }:{name,email,password,avatar:uploadAv}
+    name,email,password,phone
+   }:{name,email,password,avatar:uploadAv,phone}
 
    const updateAcc = await Accounts.update(data,{
     where:{

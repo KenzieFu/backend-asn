@@ -31,6 +31,10 @@ const Account = sequelize.define("account",{
     type:DataTypes.STRING(60),
     allowNull:false, 
   },
+  phone:{
+    type:DataTypes.STRING(60),
+    allowNull:false
+  },
   role:{
     type: DataTypes.ENUM("OWNER","ADMIN","MEMBER"),
     defaultValue:"MEMBER",
