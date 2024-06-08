@@ -1,5 +1,4 @@
 const Notifikasi = require("../models/notifikasi");
-const { wss } = require('../index');
 
 exports.fetchNotif = async(req,res,next)=>{
   const {account_id} = req.params;
