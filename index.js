@@ -31,6 +31,8 @@ const Notifikasi = require("./models/notifikasi");
 const {updateAccValidator} = require("./validator/rules")
 const multer = require("multer");
 const { registerValidator } = require("./validator/rules");
+const TryoutToken = require("./models/tryoutToken");
+const { Transaction } = require("@sequelize/core");
 const whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
 const app = express();
@@ -170,7 +172,19 @@ sequelize
       // UserTransaction.sync({force:true})
       // Notifikasi.sync({force:true})
       // Account.sync({force:true})
-      
+      //  Course.sync({force:true})
+      // ClearedCourse.sync({force:true})
+      // Tryout.sync({force:true})
+      // TryoutBundle.sync({force:true})
+      // TTBundle.sync({force:true})
+      // TryoutToken.sync({force:true})
+      // TryoutScore.sync({force:true})
+      // Notifikasi.sync({force:true})
+      // SKDAnalysis.sync({force:true})
+      // UserTryout.sync({force:true})
+      // UserTransaction.sync({force:true})
+
+
       console.log("backend-asn listening on port 8080");
     });
   })

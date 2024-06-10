@@ -1,3 +1,4 @@
+const { Op } = require("@sequelize/core");
 const Notifikasi = require("../models/notifikasi");
 
 exports.fetchNotif = async(req,res,next)=>{
@@ -53,6 +54,8 @@ exports.createNotif = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 
 

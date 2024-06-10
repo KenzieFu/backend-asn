@@ -1,5 +1,6 @@
 const { DataTypes } = require("@sequelize/core");
 const sequelize = require("../database/database");
+const ClearedCourse = require("./clearedCourse");
 
 
 const table = {
@@ -43,6 +44,7 @@ const Course = sequelize.define("course",{
 },table);
 
 // Course.sync({force:true})
+
 // Course.belongsTo(SubCategory,{foreignKey:"subCategory_id"});
 
 module.exports= Course;

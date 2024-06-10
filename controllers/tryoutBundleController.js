@@ -4,7 +4,7 @@ const { uploadFile } = require("../helper/helper");
 const Tryout = require("../models/tryout");
 const TTBundle = require("../models/tryoutBundle_tryout");
 const TryoutBundle = require("../models/tryout_bundle");
-
+const load = require("lodash")
 // exports.fetchBundle = async(req,res,next)=>{
 //   try{
 //     const bundle = await
@@ -81,11 +81,11 @@ FROM tryout_bundle tb WHERE tb.tryoutBundle_id = ${tryoutBundle_id} LIMIT 1 ;`,
 
  
       const bundletTryout = bundles[0].listTryout_id.split(",");
-      const userClearedTryout = bundles[0].userBought?bundles[0].userBought.split(","):null;
+      const userClearedTryout = bundles[0].userBought?bundles[0].userBought.split(","):[];
 
       const updatedPrice = Math.floor(bundles[0].tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
 
-      const boolBought =bundles[0].userBought == bundles[0].listTryout_id;
+      const boolBought =load.isEqual(bundles[0].userBought.sort(),bundles[0].listTryout_id?.sort()??[]);
       const changedPrice= bundles[0].userBought ===null?bundles[0].tryout_price:bundles[0].tryout_price-updatedPrice;
       const split = bundles[0].descList.split(",");
       const newData= {
@@ -123,11 +123,11 @@ FROM tryout_bundle tb;`,
 
     const newBundle = bundles.map((data)=>{
       const bundletTryout = data.listTryout_id.split(",");
-      const userClearedTryout = data.userBought?data.userBought.split(","):null;
+      const userClearedTryout = data.userBought?data.userBought.split(","):[];
 
       const updatedPrice = Math.floor(data.tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
       const split = data.descList.split(",");
-      const boolBought =data.userBought == data.listTryout_id;
+      const boolBought =load.isEqual(bundletTryout.sort(),userClearedTryout.sort());
       const changedPrice= data.userBought ===null?data.tryout_price:data.tryout_price-updatedPrice;
 
       return {

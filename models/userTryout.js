@@ -14,13 +14,13 @@ const UserTryout = sequelize.define("usertryout",{
   },
   account_id:{
     type:DataTypes.BIGINT,
-    onDelete:"setnull",
+    onDelete:"cascade",
     allowNull:true,
 
   },
   tryout_id:{
     type:DataTypes.BIGINT,
-    onDelete:"setnull",
+    onDelete:"cascade",
     allowNull:true,
   
   },
