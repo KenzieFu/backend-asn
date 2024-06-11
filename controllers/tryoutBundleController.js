@@ -80,19 +80,19 @@ FROM tryout_bundle tb WHERE tb.tryoutBundle_id = ${tryoutBundle_id} LIMIT 1 ;`,
     );
 
  
-      const bundletTryout = bundles[0].listTryout_id.split(",");
-      const userClearedTryout = bundles[0].userBought?bundles[0].userBought.split(","):[];
+      let bundletTryout = bundles[0].listTryout_id.split(",");
+      const userBougthTryout = bundles[0]?.userBought?bundles[0].userBought.split(","):[];
+      const updatedPrice = Math.floor(bundles[0].price/bundletTryout.length) *(userBougthTryout?userBougthTryout.length:0);
+      bundletTryout =bundletTryout.filter((el) => !userBougthTryout.includes(el));
 
-      const updatedPrice = Math.floor(bundles[0].tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
-
-      const boolBought =load.isEqual(bundles[0].userBought.sort(),bundles[0].listTryout_id?.sort()??[]);
-      const changedPrice= bundles[0].userBought ===null?bundles[0].tryout_price:bundles[0].tryout_price-updatedPrice;
+      const boolBought =bundletTryout.length ==0;
+      const changedPrice= bundles[0].userBought ===null?bundles[0].price:bundles[0].price-updatedPrice;
       const split = bundles[0].descList.split(",");
       const newData= {
         ...bundles[0],
         tryout_price:changedPrice,
         listTryout_id:bundletTryout,
-        userBought:userClearedTryout,
+        userBought:userBougthTryout,
         boolBought:boolBought,
         descList:split
       }
@@ -122,22 +122,42 @@ FROM tryout_bundle tb;`,
     );
 
     const newBundle = bundles.map((data)=>{
-      const bundletTryout = data.listTryout_id.split(",");
-      const userClearedTryout = data.userBought?data.userBought.split(","):[];
 
-      const updatedPrice = Math.floor(data.tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
+
+
+      let bundletTryout = data.listTryout_id.split(",");
+      const userBougthTryout = data?.userBought?data.userBought.split(","):[];
+      const updatedPrice = Math.floor(data.price/bundletTryout.length) *(userBougthTryout?userBougthTryout.length:0);
+      bundletTryout =bundletTryout.filter((el) => !userBougthTryout.includes(el));
+
+      const boolBought =bundletTryout.length ==0;
+      const changedPrice= data.userBought ===null?data.price:data.price-updatedPrice;
       const split = data.descList.split(",");
-      const boolBought =load.isEqual(bundletTryout.sort(),userClearedTryout.sort());
-      const changedPrice= data.userBought ===null?data.tryout_price:data.tryout_price-updatedPrice;
-
-      return {
+      return  {
         ...data,
-        tryout_price:changedPrice, 
-        listTryout_id:bundletTryout, 
-        userBought:userClearedTryout,
+        tryout_price:changedPrice,
+        listTryout_id:bundletTryout,
+        userBought:userBougthTryout,
         boolBought:boolBought,
         descList:split
       }
+
+      // let bundletTryout = data.listTryout_id.split(",");
+      // const userClearedTryout = data.userBought?data.userBought.split(","):[];
+      // bundletTryout =bundletTryout.filter((el) => !userClearedTryout.includes(el));
+      // const updatedPrice = Math.floor(data.tryout_price/bundletTryout.length) *(userClearedTryout?userClearedTryout.length:0);
+      // const split = data.descList.split(",");
+      // const boolBought =load.isEqual(bundletTryout.sort(),userClearedTryout.sort());
+      // const changedPrice= data.userBought ===null?data.tryout_price:data.tryout_price-updatedPrice;
+
+      // return {
+      //   ...data,
+      //   tryout_price:changedPrice, 
+      //   listTryout_id:bundletTryout, 
+      //   userBought:userClearedTryout,
+      //   boolBought:boolBought,
+      //   descList:split
+      // }
     })
     return res.status(200).json({
       data: newBundle,
