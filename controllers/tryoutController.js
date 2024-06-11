@@ -425,7 +425,13 @@ exports.leaderBoardTryout = async (req,res,next)=>{
         tryout_score:stand.tryout_score,
         createdAt:stand.createdAt,
         updatedAt:stand.updatedAt,
-        account:{...stand.account}
+        account:{
+          account_id:stand.account.account_id,
+          username:stand.account.username,
+          name:stand.account.name,
+          email:stand.account.email,
+          avatar:`${urlLapis}/${bucketName}/${stand.account.avatar}`
+        }
       }
    })
 
