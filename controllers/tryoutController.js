@@ -411,12 +411,28 @@ exports.leaderBoardTryout = async (req,res,next)=>{
       ],
       orderBy:['tryout_score DESC']
     });
-   
+   const newFormatedData = tryoutStandings.map((stand)=>{
+      return {
+        tryoutScore_id:stand.tryoutScore_id,
+        tryout_id:stand.tryout_id,
+        account_id:stand.account_id,
+        tryout_passed:stand.tryout_passed,
+        twk_score:stand.twk_score,
+        tiu_score:stand.tiu_score,
+        tkp_score:stand.tkp_score,
+        twk_wrong:stand.twk_wrong,
+        tiu_wrong:stand.tiu_wrong,
+        tryout_score:stand.tryout_score,
+        createdAt:stand.createdAt,
+        updatedAt:stand.updatedAt,
+        account:{...stand.account}
+      }
+   })
 
   
 
     res.status(200).json({
-      data:tryoutStandings
+      data:newFormatedData
     })
 
   }catch(err){
