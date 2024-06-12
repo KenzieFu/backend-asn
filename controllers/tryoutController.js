@@ -244,9 +244,13 @@ exports.getQuiz = async(req,res,next)=>{
 
   // 2. Split the string by comma and trim whitespace
   const optionArray = cleanedString.replace(/'/g, '').split(',').map(item => item.trim()); 
+      const splitDir = tryout.tryout_file.split("/");
+      console.log(splitDir)
+      const imagePath = `${urlLapis}/${bucketName}/${splitDir[0]}/${splitDir[1]}/images`
       if(da.category ==3){
         return{
           ...da,
+          question_image:da.question_image?`${imagePath}/${da.question_image}`:null,
           option:optionArray,
           jawaban_tkp:JSON.parse(da.jawaban_tkp)
         }
@@ -254,6 +258,7 @@ exports.getQuiz = async(req,res,next)=>{
         else{
           return{
             ...da,
+            question_image:da.question_image?`${imagePath}/${da.question_image}`:null,
             option:optionArray,
   
           }
