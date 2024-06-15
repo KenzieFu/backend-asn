@@ -13,6 +13,7 @@ const courseController = require("./controllers/courseController");
 const tryoutController = require("./controllers/tryoutController");
 const transController = require("./controllers/transaction");
 const accountController = require("./controllers/accountController");
+const latsolController = require("./controllers/latsolController");
 
 // Model imports
 const Account = require("./models/account");
@@ -33,8 +34,12 @@ const multer = require("multer");
 const { registerValidator } = require("./validator/rules");
 const TryoutToken = require("./models/tryoutToken");
 const { Transaction } = require("@sequelize/core");
-const whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
-
+const auth = require("./middleware/auth");
+const admin = require("./middleware/admin");
+const whitelist = ["image/png", "image/jpeg", "image/jpg", "image/webp","application/json"];
+const cors = require("cors");
+const LATSOL = require("./models/latsol");
+const HistoryLat = require("./models/historylatsol");
 const app = express();
 const storage = multer.memoryStorage();
 
@@ -48,6 +53,12 @@ const uploadMulter = multer({
   },
 });
 
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+};
+
+app.use(cors(corsOptions))
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -63,6 +74,8 @@ app.use((req, res, next) => {
 
 // Routes
 app.use(authRoute);
+
+
 app.use(fetchRoute);
 app.use(crudRoute);
 
@@ -76,7 +89,7 @@ app.use((error, req, res, next) => {
 });
 
 // WebSocket server
-const wss = new WebSocket.Server({ port: 8081 });
+const wss = new WebSocket.Server({noServer:true});
 
 app.set("wss", wss);
 
@@ -94,33 +107,62 @@ wss.on("connection", (ws) => {
   });
 });
 
+
+// Middleware to handle WebSocket upgrade requests
+app.use((req, res, next) => {
+  if (req.headers.upgrade === 'websocket') {
+    // Upgrade the connection to WebSocket
+    wss.handleUpgrade(req, req.socket, req.head, (ws) => {
+      wss.emit('connection', ws, req); 
+    });
+  } else {
+    next();
+  }
+});
+
 // Additional routes
 app.post(
   "/courses",
+  admin,
   uploadMulter.single("course_image"),
-  courseController.createCourse
+  courseController.createCourse,
 );
 app.put(
   "/courses/content/:course_id",
+  admin,
   uploadMulter.single("course_file"),
   courseController.assignCourseContent
 );
 app.put(
   "/accounts/:account_id",
-  uploadMulter.single("avatar"),
+  auth,
+  uploadMulter.single("avatar"), 
   updateAccValidator,
   accountController.updateAccount
 );
 app.post(
   "/tryouts",
+  admin,
   uploadMulter.single("tryout_file"),
   tryoutController.createTryout
 );
 app.post(
   "/tryouts/transaction/:account_id",
+  auth,
   uploadMulter.single("bukti_transaksi"),
   transController.buyTryout
 );
+
+//create new Latsol
+app.post(
+  "/latsol",
+  
+  uploadMulter.fields([
+    {name:"lat_thumb",maxCount:1},
+    {name:"lat_file",maxCount:1}
+  ]),
+  latsolController.createLatsol
+)
 
 sequelize
   .authenticate()
@@ -169,6 +211,10 @@ sequelize
 
       //tryoutBundle and Tryout
       TryoutBundle.belongsToMany(Tryout, { through: "tryoutBundle_tryout" });
+
+      LATSOL.belongsTo(Category,{foreignKey:"category_id"});
+      HistoryLat.belongsTo(Account,{foreignKey:"account_id"});
+      HistoryLat.belongsTo(LATSOL,{foreignKey:"latsol_id"})
       // UserTransaction.sync({force:true})
       // Notifikasi.sync({force:true})
       // Account.sync({force:true})
@@ -183,6 +229,9 @@ sequelize
       // SKDAnalysis.sync({force:true})
       // UserTryout.sync({force:true})
       // UserTransaction.sync({force:true})
+
+      // LATSOL.sync({force:true})
+      // HistoryLat.sync({force:true})
 
 
       console.log("backend-asn listening on port 8080");

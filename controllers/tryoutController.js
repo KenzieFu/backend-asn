@@ -1,11 +1,11 @@
 const sequelize = require("../database/database");
-const { uploadFile } = require("../helper/helper");
+const { uploadFile, uploadFILE } = require("../helper/helper");
 const Tryout = require("../models/tryout");
 const { urlLapis, bucketName } = require("../static");
 const {Storage} = require("@google-cloud/storage")
 const _ = require("lodash");
 const TryoutScore = require("../models/tryoutScore");
-const { QueryTypes, where, Op } = require("@sequelize/core");
+const { QueryTypes, where, Op, default: Sequelize } = require("@sequelize/core");
 const Account = require("../models/account");
 
 const storage = new Storage();
@@ -224,8 +224,8 @@ exports.getQuiz = async(req,res,next)=>{
     const datafile = await filejson.json()
     
 
-    const twk = datafile.filter((data)=>data.category ==1);
-    const tiu = datafile.filter((data)=>data.category ==2);
+    const twk = datafile.filter((data)=>data.category ==2);
+    const tiu = datafile.filter((data)=>data.category ==1);
     const tkp = datafile.filter((data)=>data.category ==3);
 
     // const randomTIU =_.shuffle(tiu);
@@ -237,6 +237,7 @@ exports.getQuiz = async(req,res,next)=>{
       ...twk,
       ...tkp
     ]
+    const splitDir = tryout.tryout_file.split("/");
     const dataformated = finalQuiz.map(da=>{
        // 1. Remove single quotes and square brackets
   const cleanedString = da.option.substring(1, da.option.length - 1); 
@@ -244,8 +245,7 @@ exports.getQuiz = async(req,res,next)=>{
 
   // 2. Split the string by comma and trim whitespace
   const optionArray = cleanedString.replace(/'/g, '').split(',').map(item => item.trim()); 
-      const splitDir = tryout.tryout_file.split("/");
-      console.log(splitDir)
+    
       const imagePath = `${urlLapis}/${bucketName}/${splitDir[0]}/${splitDir[1]}/images`
       if(da.category ==3){
         return{
@@ -313,21 +313,23 @@ exports.createTryout = async (req,res,next)=>{
         return next(error);
       }
       let date = new Date();
-      date.setDate(date.getDate()+14);
+      date.setDate(date.getDate()+30);
     let ToUnknown= tryout_closed?tryout_closed:date
       const pathCourse = `tryout/${tryout_title.replaceAll(" ","").toLowerCase()}`;
-    const resulter = await uploadFile(file,pathCourse);
-
+    const resulter = await uploadFILE(file,pathCourse);
+    console.log(tryout_status)
     const data = {
       tryout_title,
       tryout_file:resulter,
       tryout_duration:tryout_duration,
-      tryout_status:tryout_status?tryout_status:"DISABLE",
-      tryout_type:tryout_type?tryout_type:"FREE",
+      tryout_status:tryout_status??"DISABLE",
+      tryout_type:tryout_type??"FREE",
       tryout_price:tryout_price??10000,
       tryout_total:tryout_total,
-      tryout_closed:ToUnknown
+      tryout_closed:ToUnknown,
+      createdAt:Sequelize.fn("CURRENT_TIMESTAMP")
     }
+    console.log(data);
 
     const newTO = await Tryout.create(data);
     res.status(200).json({
@@ -414,7 +416,9 @@ exports.leaderBoardTryout = async (req,res,next)=>{
       include:[
         {model:Account}
       ],
-      orderBy:['tryout_score DESC']
+      order:[
+        ['tryout_score','DESC']
+      ]
     });
    const newFormatedData = tryoutStandings.map((stand)=>{
       return {

@@ -41,7 +41,7 @@ const Account = sequelize.define("account",{
     allowNull:false
   },
   accessToken:{
-    type:DataTypes.STRING(80),
+    type:DataTypes.STRING(500),
     allowNull:true,
   },
   avatar:{

@@ -46,10 +46,12 @@ exports.login = async (req,res,next)=>{
         account_id:account.account_id,
         username:account.username,
         email : account.email,
+        role:account.role
       },
       tokenExp,
       {expiresIn:"14d"}
     );
+    console.log(token);
 
     const update = await Accounts.update({accessToken:token},{
       where:{

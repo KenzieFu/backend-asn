@@ -1,6 +1,6 @@
 const { QueryTypes, where } = require("@sequelize/core");
 const sequelize = require("../database/database");
-const { uploadFile } = require("../helper/helper");
+const { uploadFile, uploadFILE } = require("../helper/helper");
 const Course = require("../models/course");
 const fs = require("fs");
 const { urlLapis, bucketName } = require("../static");
@@ -67,23 +67,13 @@ exports.getCourse = async ( req,res,next)=>{
         type: QueryTypes.SELECT,
       }
     );
-    let content = []
 
-    if(fetchCourse[0].course_file){
-      const test = await fetch(`${urlLapis}/${bucketName}/${fetchCourse[0].course_file}`)
-      console.log(`${urlLapis}/${bucketName}/${fetchCourse[0].course_file}`)
-      let data =await test.text();
-      data = data.toString().split("\r\n");
-      for(i in data){
-        content.push(data[i])
-      }
-    }
-
-
+      const test =`${urlLapis}/${bucketName}/${fetchCourse[0].course_file}`
+      const images = `${urlLapis}/${bucketName}/${fetchCourse[0].course_image}`;
     const fetchedCourse = {...fetchCourse[0],
-      content:content
+      course_file:test,
+      course_image:images,
     }
-
     res.status(200).json({
       data:fetchedCourse
     })
@@ -103,8 +93,8 @@ exports.createCourse = async(req,res,next)=>{
       error.statusCode = 422;
       return next(error);
     }
-    const pathCourse = `course/${course_name.replaceAll(" ","").toLowerCase()}`;
-    const resulter = await uploadFile(file,pathCourse);
+    const pathCourse = `course`;
+    const resulter = await uploadFILE(file,pathCourse);
     
     const countCourseSequence = await Course.count({
       where:{
@@ -170,9 +160,9 @@ exports.updateCourse = async(req,res,next)=>{
       return next(error);
     }
     if(file){
-      const pathCourse = `course/${course_name.replaceAll(" ","").toLowerCase()}`;
+      const pathCourse = `course`;
       console.log("File Exists");
-      pathName = await uploadFile(file,pathCourse)
+      pathName = await uploadFILE(file,pathCourse)
     }
     const data = {
       category_id,
@@ -235,8 +225,8 @@ exports.assignCourseContent = async(req,res,next)=>{
       error.statusCode = 500;
       return next(error);
     }
-    const pathCourse = `course/${course.course_name.replaceAll(" ","").toLowerCase()}`;
-    const assignContent = await uploadFile(file,pathCourse);
+    const pathCourse = `course/content`;
+    const assignContent = await uploadFILE(file,pathCourse);
     const updateCourse = await Course.update({course_file:assignContent},{
       where:{
         course_id:course_id

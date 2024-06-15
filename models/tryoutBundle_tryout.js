@@ -4,7 +4,7 @@ const sequelize = require("../database/database");
 
 
 const table = {
-  tableName:"tryoutBundle_tryout",
+  tableName:"tryoutbundle_tryout",
   timestamps:true,
 }
 const  TTBundle = sequelize.define("tryout",{

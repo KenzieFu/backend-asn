@@ -30,5 +30,11 @@ module.exports = (req, res, next) => {
   }
 
   req.userId = decodedToken.userId;
+  if(decodedToken.role !="ADMIN"){
+    const error = new Error("Not Authorize");
+    error.statusCode = 401;
+    error.message="Tidak diizinkan"
+    return next(error);
+  }
   next();
 };

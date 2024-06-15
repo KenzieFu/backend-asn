@@ -30,7 +30,6 @@ const  Tryout = sequelize.define("tryout",{
     type:DataTypes.INTEGER,
     allowNull:false,
   },
-
   tryout_status:{
     type:DataTypes.ENUM("DISABLE","ACTIVE"),
     defaultValue:"ACTIVE",
