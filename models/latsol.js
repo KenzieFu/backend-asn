@@ -2,11 +2,11 @@ const { DataTypes } = require("@sequelize/core");
 const sequelize = require("../database/database");
 
 const table = {
-  tablename:"latsol",
+  tablename:"latsols",
   timestamps:true,
 }
 
-const LATSOL = sequelize.define("latsol",{
+const LATSOL = sequelize.define("latsols",{
   latsol_id :{
     type:DataTypes.BIGINT,
     primaryKey:true,

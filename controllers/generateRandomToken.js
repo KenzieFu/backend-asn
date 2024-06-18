@@ -4,6 +4,7 @@ const nano = require("nanoid");
 const UserTryout = require("../models/userTryout");
 const sequelize = require("../database/database");
 const Notifikasi = require("../models/notifikasi");
+const { Op } = require("@sequelize/core");
 
 
 
@@ -36,8 +37,7 @@ exports.redeemToken = async(req,res,next)=>{
       where:{
         tryoutToken_code:tryoutToken_code
       }
-    })
-    ;
+    });
     if(!checkToken){
       const error = new Error("Not Found");
       error.statusCode = 404
@@ -50,6 +50,26 @@ exports.redeemToken = async(req,res,next)=>{
       error.message = "Token telah di pakai"
       return next(error);
     }
+    console.log(checkToken)
+    let splitTryout = checkToken.tryoutToken_listTryout.split(",")
+    
+    const userto = await UserTryout.findAll({
+      where:{
+        tryout_id: { [Op.in]: splitTryout },
+        account_id:account_id
+      }
+    })
+
+    const listTo = userto.map((to)=>to.tryout_id);
+  
+    let haveAll = splitTryout.filter((el)=> !listTo.includes(el));
+  
+    if(haveAll.length ==0){
+      const error = new Error("Validation");
+      error.statusCode=500;
+      error.message="Maaf, Anda sudah memiliki semua tryout dalam token ini."
+      return next(error);
+    }
 
     const updateToken = await TryoutToken.update({
       tryoutToken_status:"REDEEMED"
@@ -59,18 +79,25 @@ exports.redeemToken = async(req,res,next)=>{
       },
       transaction:t
     });
-    let splitTryout = checkToken.tryoutToken_listTryout.split(",")
-    const userTryoutadd = await UserTryout.bulkCreate(
-      splitTryout.map((toId)=>{
-        return {
-          account_id:account_id,
-          tryout_id:toId,
-          userTryout_status:"PAID"
-        }
-      },{
-        transaction:t
-      })
-    )
+
+   
+    
+    
+   
+  
+      const userTryoutadd = await UserTryout.bulkCreate(
+        haveAll.map((toId)=>{
+          return {
+            account_id:account_id,
+            tryout_id:toId,
+            userTryout_status:"PAID"
+          }
+        },{
+          transaction:t
+        })
+      )
+
+    
 
     const notifmsg = {
       account_id:account_id,

@@ -237,8 +237,10 @@ exports.getQuiz = async(req,res,next)=>{
       ...twk,
       ...tkp
     ]
+    
     const splitDir = tryout.tryout_file.split("/");
     const dataformated = finalQuiz.map(da=>{
+     
        // 1. Remove single quotes and square brackets
   const cleanedString = da.option.substring(1, da.option.length - 1); 
   // Now: "x', 'x', 'x', 'x', 'x"
@@ -297,7 +299,7 @@ exports.getQuiz = async(req,res,next)=>{
 exports.createTryout = async (req,res,next)=>{
   const {
     tryout_title,
-    tryout_duration,
+    tryout_duration=6000,
     tryout_status,
     tryout_type,
     tryout_price,
@@ -321,13 +323,13 @@ exports.createTryout = async (req,res,next)=>{
     const data = {
       tryout_title,
       tryout_file:resulter,
-      tryout_duration:tryout_duration,
+      tryout_duration:tryout_duration??6000,
       tryout_status:tryout_status??"DISABLE",
       tryout_type:tryout_type??"FREE",
-      tryout_price:tryout_price??10000,
+      tryout_price:tryout_price??15000,
       tryout_total:tryout_total,
       tryout_closed:ToUnknown,
-      createdAt:Sequelize.fn("CURRENT_TIMESTAMP")
+      createdAt:date
     }
     console.log(data);
 

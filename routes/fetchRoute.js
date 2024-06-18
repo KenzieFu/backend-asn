@@ -97,7 +97,7 @@ router.get("/latsol",latsolController.fetchAllLatsol);
 router.get("/latsol/:latsol_id",latsolController.fetchOneLatsol);
 
 //start latsol
-router.get("/latsol/:latsol_id/start",latsolController.fetchOneLatsol);
+router.get("/latsol/:latsol_id/start",latsolController.startLatsol);
 
 //list history latsol
 router.get("/latsol/:latsol_id/account/:account_id",historyLatController.fetchHistoryLatsol)

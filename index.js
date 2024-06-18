@@ -89,7 +89,7 @@ app.use((error, req, res, next) => {
 });
 
 // WebSocket server
-const wss = new WebSocket.Server({noServer:true});
+const wss = new WebSocket.Server({port:8081});
 
 app.set("wss", wss);
 

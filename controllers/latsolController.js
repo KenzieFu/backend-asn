@@ -48,7 +48,7 @@ exports.createLatsol = async (req, res, next) => {
 };
 
 exports.editLatsol = async (req, res, next) => {
-  const { lastol_id } = req.params;
+  const { latsol_id } = req.params;
   const { category_id, lat_desc, jumlah_soal, waktu } = req.body;
   const lat_thumb = req.files.lat_thumb[0];
   const lat_file = req.files.lat_file[0];
@@ -76,7 +76,7 @@ exports.editLatsol = async (req, res, next) => {
       data,
       {
         where: {
-          lastol_id: lastol_id,
+          latsol_id: latsol_id,
         },
       }
     );
@@ -89,11 +89,11 @@ exports.editLatsol = async (req, res, next) => {
 };
 
 exports.deleteLatsol = async(req,res,next)=>{
-  const { lastol_id} = req.params;
+  const { latsol_id} = req.params;
   try{
       const deleteLat = await LATSOL.delete({
         where:{
-          lastol_id:lastol_id
+          latsol_id:latsol_id
         }
       });
       return res.status(200).json({
@@ -104,12 +104,14 @@ exports.deleteLatsol = async(req,res,next)=>{
   }
 }
 
-exports.fetchOneLatsol = async(req,res,next)=>{
-  const {lastol_id} = req.params;
+exports.startLatsol = async(req,res,next)=>{
+  const {latsol_id} = req.params;
   try{
 
     const lat = await LATSOL.findOne({
-      where:lastol_id,
+      where:{
+        latsol_id:latsol_id
+      },
       include:[
         {model:Category}
       ],
@@ -183,6 +185,42 @@ const optionArray = cleanedString.replace(/'/g, '').split(',').map(item => item.
 }
 
 
+exports.fetchOneLatsol = async(req,res,next)=>{
+  const {latsol_id} = req.params;
+  try{
+
+    const lat = await LATSOL.findOne({
+      where:{
+        latsol_id:latsol_id
+      },
+      include:[
+        {model:Category}
+      ],
+    },
+    
+  );
+
+    const data ={
+      latsol_id:lat.latsol_id,
+      category:lat.category,
+    
+      lat_desc:lat.lat_desc,
+      jumlah_soal:lat.jumlah_soal,
+      waktu:lat.waktu,
+      lat_thumb:`${urlLapis}/${bucketName}/${lat.lat_thumb}`,
+      lat_file: `${urlLapis}/${bucketName}/${lat.lat_file}`,
+
+    }
+
+    return res.status(200).json({
+      data:data
+    })
+  }catch(err){
+    next(err)
+  }
+}
+
+
 exports.fetchAllLatsol = async(req,res,next)=>{
 
   try{
@@ -192,8 +230,9 @@ exports.fetchAllLatsol = async(req,res,next)=>{
       ],
     });
     let content =findAll.map((lat)=>{
+      console.log(lat)
       return{
-        lastol_id:lat.lastol_id,
+        latsol_id:lat.latsol_id,
         category:lat.category,
         lat_desc:lat.lat_desc,
         jumlah_soal:lat.jumlah_soal,
