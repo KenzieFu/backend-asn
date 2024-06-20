@@ -90,7 +90,7 @@ FROM tryout_bundle tb WHERE tb.tryoutBundle_id = ${tryoutBundle_id} LIMIT 1 ;`,
       const split = bundles[0].descList.split(",");
       const newData= {
         ...bundles[0],
-        tryout_price:changedPrice,
+        price:changedPrice,
         listTryout_id:bundletTryout,
         userBought:userBougthTryout,
         boolBought:boolBought,
@@ -135,7 +135,7 @@ FROM tryout_bundle tb;`,
       const split = data.descList.split(",");
       return  {
         ...data,
-        tryout_price:changedPrice,
+        price:changedPrice,
         listTryout_id:bundletTryout,
         userBought:userBougthTryout,
         boolBought:boolBought,
