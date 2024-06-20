@@ -4,17 +4,17 @@ To run this app on your device, follow these steps:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/MahmulP/LolosASN.git
+   git clone https://github.com/KenzieFu/backend-asn.git
 
-2. Open the project in Android Studio.
-
-3. Build and run the app on an Android emulator or a connected Android device.
-
-
-
-klo utk quiz ada bergambar itu di bagian namacpns2024 ada folder images nah itu semua disana asset2 utk gambar quiz, baik itu option atau soal
-wajib png karena utk option, dia itu ambe nama dari option terus dilowercase gdk spasi
-![image](https://github.com/KenzieFu/backend-asn/assets/95515953/c554e171-e942-4bcc-9fd8-9c0771f4d55d)
+2. Open the project in Visual Studio Code.
+3. import database file backend-asn.sql to your mysql database with database name `backend-asn`
+4. Install dependencies (Node version v22.1.0)
+   ```bash
+   npm install
+   
+5. Run the app with :
+   ```bash
+   npm run start-dev
 
 
 ## API Documentation
