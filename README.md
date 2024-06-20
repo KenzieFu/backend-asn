@@ -1,3 +1,8 @@
+## Installation
+
+
+
+
 klo utk quiz ada bergambar itu di bagian namacpns2024 ada folder images nah itu semua disana asset2 utk gambar quiz, baik itu option atau soal
 wajib png karena utk option, dia itu ambe nama dari option terus dilowercase gdk spasi
 ![image](https://github.com/KenzieFu/backend-asn/assets/95515953/c554e171-e942-4bcc-9fd8-9c0771f4d55d)
